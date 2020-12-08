@@ -29,6 +29,12 @@ class Hydration {
     return dailyData;
   }
 
+  calculateDailyWaterIntake(userID, date) {
+    const currentUserData = this.findDataByUser(userID);
+    const dailyIntake = this.findDataByDate(date, currentUserData);
+    return dailyIntake.numOunces;
+  }
+
 }
 
 module.exports = Hydration;
