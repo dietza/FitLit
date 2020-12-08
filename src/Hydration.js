@@ -35,6 +35,16 @@ class Hydration {
     return dailyIntake.numOunces;
   }
 
+  findWeeklyWaterIntake(userID, date) {
+    const currentUserData = this.findDataByUser(userID);
+    const startDate = currentUserData.find(info => info.date === date);
+    const startIndex = currentUserData.indexOf(startDate);
+    const endIndex = startIndex + 7;
+    const weeklyDates = currentUserData.slice(startIndex, endIndex);
+    const weeklyOunceCounts = weeklyDates.map(info => info.numOunces)
+    return weeklyOunceCounts;
+  }
+
 }
 
 module.exports = Hydration;
