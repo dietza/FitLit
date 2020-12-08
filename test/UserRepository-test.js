@@ -150,4 +150,9 @@ describe('UserRepository', () => {
     });
   });
 
+  it('should calculate the average step goal of all users', () => {
+    const averageStepGoal = userRepo.calculateAverageStepGoal();
+    expect(averageStepGoal).to.equal(7250);
+  });
+
 });
