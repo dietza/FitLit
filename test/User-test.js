@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User')
+
 const users = [{
   "id": 5,
   "name": "Erick Schaden",
