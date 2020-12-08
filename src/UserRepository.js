@@ -11,6 +11,13 @@ class UserRepository {
     return stepGoalsTotal / this.userData.length;
   }
 
+  findUser(userID) {
+    const targetUser = this.userData.find(user => {
+      return user.id === userID;
+    });
+    return targetUser;
+  }
+
 }
 
 module.exports = UserRepository;
