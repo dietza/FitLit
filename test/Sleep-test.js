@@ -330,15 +330,27 @@ describe('Sleep', () => {
   });
 
   it('should return a user\'s number of hours slept for a given date', () => {
-    const hoursSlept = sleep.returnHoursSlept(1, '2019/06/17');
+    const hoursSlept = sleep.returnDailySleepData(1, '2019/06/17', 'hoursSlept');
     expect(hoursSlept).to.be.a('number');
     expect(hoursSlept).to.equal(8);
   });
 
   it('should return a user\'s sleep quality for a given date', () => {
-    const sleepQuality = sleep.returnSleepQuality(3, '2019/06/20');
+    const sleepQuality = sleep.returnDailySleepData(3, '2019/06/20', 'sleepQuality');
     expect(sleepQuality).to.be.a('number');
     expect(sleepQuality).to.equal(1.2);
   });
+
+  it('should return list of a user\'s sleep hours for a week', () => {
+    const weeklySleepTimes = sleep.findSleepDataByWeek(4, '2019/06/15', 'hoursSlept');
+    expect(weeklySleepTimes).to.be.an('array');
+    expect(weeklySleepTimes).to.deep.equal([5.4, 8.3, 5.7, 5.9, 5.2, 8.3, 10.6]);
+  })
+
+  it('should return a list of a user\'s sleep quality for a week', () => {
+    const weeklySleepQuality = sleep.findSleepDataByWeek(1, '2019/06/15', 'sleepQuality');
+    expect(weeklySleepQuality).to.be.an('array');
+    expect(weeklySleepQuality).to.deep.equal([2.2, 3.8, 2.6, 3.1, 1.2, 1.2, 4.2]);
+  })
 
 });

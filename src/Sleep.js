@@ -29,17 +29,23 @@ class Sleep {
     return dailyData;
   }
 
-  returnHoursSlept(userID, date) {
+  returnDailySleepData(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
-    const dailyHoursSlept = this.findDataByDate(date, currentUserData);
-    return dailyHoursSlept.hoursSlept;
+    const dailySleepData = this.findDataByDate(date, currentUserData);
+    return dailySleepData[dataMetric];
   }
 
-  returnSleepQuality(userID, date) {
+  findSleepDataByWeek(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
-    const dailySleepQuality = this.findDataByDate(date, currentUserData);
-    return dailySleepQuality.sleepQuality;
+    const startDate = currentUserData.find(info => info.date === date);
+    const startIndex = currentUserData.indexOf(startDate);
+    const endIndex = startIndex + 7;
+    const weeklyDates = currentUserData.slice(startIndex, endIndex);
+    const weeklySleepData = weeklyDates.map(info => info[dataMetric])
+    return weeklySleepData;
   }
+
+
 
 }
 
