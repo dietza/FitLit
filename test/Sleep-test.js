@@ -353,4 +353,12 @@ describe('Sleep', () => {
     expect(weeklySleepQuality).to.deep.equal([2.2, 3.8, 2.6, 3.1, 1.2, 1.2, 4.2]);
   })
 
+  it('should calculate the average sleep quality of all users (over all time)', () => {
+    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepDataAverage('sleepQuality');
+    expect(allUserSleepQualityAverage).to.be.a('number');
+    expect(allUserSleepQualityAverage).to.equal(3)
+  })
+
+  
+
 });

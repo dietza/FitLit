@@ -45,7 +45,17 @@ class Sleep {
     return weeklySleepData;
   }
 
-
+  calculateAllUsersSleepDataAverage(dataMetric) {
+    const dateList = this.sleepData.map(info => info.date);
+    const totalDates = [...new Set(dateList)];
+    const userList = this.sleepData.map(info => info.userID);
+    const totalUsers = [...new Set(userList)];
+    const totalSleepData = this.sleepData.reduce((acc, initial) => {
+      acc += initial[dataMetric]
+      return acc;
+    }, 0)
+    return Math.round((totalSleepData / totalDates.length) / totalUsers.length);
+  }
 
 }
 
