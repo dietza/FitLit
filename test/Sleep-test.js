@@ -309,5 +309,26 @@ describe('Sleep', () => {
     ]);
   });
 
-  
+  it('should calculate the average number of hours a user has slept', () => {
+
+    const averageHoursSlept1 = sleep.calculateDataAverage(3, 'hoursSlept');
+    expect(averageHoursSlept1).to.be.a('number');
+    expect(averageHoursSlept1).to.equal(9);
+    const averageHoursSlept2 = sleep.calculateDataAverage(4, 'hoursSlept');
+    expect(averageHoursSlept2).to.be.a('number');
+    expect(averageHoursSlept2).to.equal(7);
+
+  });
+
+  it('should calculate a user\'s average sleep quality', () => {
+
+    const averageSleepQuality1 = sleep.calculateDataAverage(1, 'sleepQuality');
+    expect(averageSleepQuality1).to.be.a('number');
+    expect(averageSleepQuality1).to.equal(3);
+    const averageSleepQuality2 = sleep.calculateDataAverage(2, 'sleepQuality');
+    expect(averageSleepQuality2).to.be.a('number');
+    expect(averageSleepQuality2).to.equal(4);
+
+  });
+
 });
