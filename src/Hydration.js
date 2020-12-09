@@ -25,7 +25,7 @@ class Hydration {
   findDataByDate(date, currentUserData) {
     const dailyData = currentUserData.find(hydrationInfo => {
       return hydrationInfo.date === date
-      });
+    });
     return dailyData;
   }
 
