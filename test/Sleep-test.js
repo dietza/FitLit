@@ -446,7 +446,7 @@ describe('Sleep', () => {
   it('should return all users with a sleep quality average above 3 in a given week', () => {
     const bestQualitySleepers = sleep.findBestQualitySleepers('2019/06/15');
     expect(bestQualitySleepers).to.be.an('array');
-    expect(bestQualitySleepers).to.deep.equal([8])
+    expect(bestQualitySleepers).to.deep.equal([2, 3]);
   })
 
 });
