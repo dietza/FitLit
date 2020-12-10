@@ -105,7 +105,7 @@ class Sleep {
       console.log('qualityAverage >>>>>>>>', qualityAverage);
 
       if (qualityAverage > 3) {
-        topSleepers.push(userID);
+        topSleepers.push({[userID] : qualityAverage});
 
         // Do we actually want to return key: value pairs to include the user's average for that week? {userID: qualityAverage}
 
