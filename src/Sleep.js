@@ -57,6 +57,33 @@ class Sleep {
     return Math.round((totalSleepData / totalDates.length) / totalUsers.length);
   }
 
+  findBestQualitySleepers(date) {
+    // Input: date, userArray, sleepData
+    // Out: array of userIDs with sleep quality average above 3 for a given week
+    // dataset of the week
+    // calculate sleep quality ave of all users
+    // return userID of users with sleep quality > 3
+    // const usersWeeklyData = userArray.iterate(user => user[userID] this.findSleepDataByWeek(userID, date, 'sleepQuality')
+    // usersWeeklyData.calculateAllUsersSleepDataAverage(dataMetric)
+    const startDate = this.sleepData.find(info => info.date === date);
+    const startIndex = this.sleepData.indexOf(startDate);
+    const endIndex = startIndex + 7;
+    const weeklyDates = this.sleepData.slice(startIndex, endIndex);
+    // const weeklySleepData = weeklyDates.map(info => info.sleepQuality);
+    const userList = weeklyDates.map(info => info.userID);
+    const totalUsers = [...new Set(userList)];
+    const topSleepers = totalUsers.reduce((overThree, userID) => {
+      console.log(weeklyDates)
+      const userWeeklyAverage = this.calculateDataAverage(user.userID, 'sleepQuality');
+      if (userWeeklyAverage > 3) {
+        overThree.push(user.userID);
+      }
+      console.log(userWeeklyAverage)
+      return overThree;
+    },[]);
+    return topSleepers;
+  }
+
 }
 
 module.exports = Sleep;

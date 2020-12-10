@@ -1,6 +1,66 @@
 const chai = require('chai');
 const expect = chai.expect;
 const Sleep = require('../src/Sleep');
+const UserRepository = require('../src/UserRepository')
+const User = require('../src/User')
+
+const users = [
+  {
+  "id": 1,
+  "name": "Luisa Hane",
+  "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+  "email": "Diana.Hayes1@hotmail.com",
+  "strideLength": 4.3,
+  "dailyStepGoal": 10000,
+  "friends": [
+    16,
+    4,
+    8
+  ]
+},
+{
+  "id": 2,
+  "name": "Jarvis Considine",
+  "address": "30086 Kathryn Port, Ciceroland NE 07273",
+  "email": "Dimitri.Bechtelar11@gmail.com",
+  "strideLength": 4.5,
+  "dailyStepGoal": 5000,
+  "friends": [
+    9,
+    18,
+    24,
+    19
+  ]
+},
+{
+  "id": 3,
+  "name": "Herminia Witting",
+  "address": "85823 Bosco Fork, East Oscarstad MI 85126-5660",
+  "email": "Elwin.Tromp@yahoo.com",
+  "strideLength": 4.4,
+  "dailyStepGoal": 5000,
+  "friends": [
+    19,
+    11,
+    42,
+    33
+  ]
+},
+{
+  "id": 4,
+  "name": "Mae Connelly",
+  "address": "28926 Schinner Islands, Turnermouth NE 23720-3230",
+  "email": "Marcos_Pollich@hotmail.com",
+  "strideLength": 3.1,
+  "dailyStepGoal": 4000,
+  "friends": [
+    48,
+    7,
+    44,
+    8
+  ]
+}
+]
 
 const sleepData = [
   {
@@ -223,9 +283,27 @@ const sleepData = [
 
 describe('Sleep', () => {
   let sleep;
+  let user1;
+  let user2;
+  let user3;
+  let user4;
+  let allUsers;
+  let userRepo;
   
   beforeEach(() => {
     sleep = new Sleep(sleepData)
+
+    allUsers = users.map(userInfo => {
+      const user = new User(userInfo);
+      return user;
+    });
+
+    userRepo = new UserRepository(allUsers);
+
+    user1 = userRepo.userData[0];
+    user2 = userRepo.userData[1];
+    user3 = userRepo.userData[2];
+    user4 = userRepo.userData[3];
   });
 
   it('should be an instance of Sleep class', ()=> {
@@ -336,13 +414,13 @@ describe('Sleep', () => {
   });
 
   it('should return a user\'s sleep quality for a given date', () => {
-    const sleepQuality = sleep.returnDailySleepData(3, '2019/06/20', 'sleepQuality');
+    const sleepQuality = sleep.returnDailySleepData(user3.id, '2019/06/20', 'sleepQuality');
     expect(sleepQuality).to.be.a('number');
     expect(sleepQuality).to.equal(1.2);
   });
 
   it('should return list of a user\'s sleep hours for a week', () => {
-    const weeklySleepTimes = sleep.findSleepDataByWeek(4, '2019/06/15', 'hoursSlept');
+    const weeklySleepTimes = sleep.findSleepDataByWeek(user4.id, '2019/06/15', 'hoursSlept');
     expect(weeklySleepTimes).to.be.an('array');
     expect(weeklySleepTimes).to.deep.equal([5.4, 8.3, 5.7, 5.9, 5.2, 8.3, 10.6]);
   })
@@ -359,6 +437,16 @@ describe('Sleep', () => {
     expect(allUserSleepQualityAverage).to.equal(3)
   })
 
-  
+  it('should calculate the average sleep hours of all users (over all time)', () => {
+    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepDataAverage('hoursSlept');
+    expect(allUsersAverageHoursSlept).to.be.a('number');
+    expect(allUsersAverageHoursSlept).to.equal(8)
+  })
+
+  it('should return all users with a sleep quality average above 3 in a given week', () => {
+    const bestQualitySleepers = sleep.findBestQualitySleepers('2019/06/15');
+    expect(bestQualitySleepers).to.be.an('array');
+    expect(bestQualitySleepers).to.deep.equal([8])
+  })
 
 });
