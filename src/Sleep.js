@@ -81,7 +81,7 @@ class Sleep {
 
     })
 
-    console.log('weeklySleepData OUT REDUCE >>>>>>>>', weeklySleepData);
+    // console.log('weeklySleepData OUT REDUCE >>>>>>>>', weeklySleepData);
 
     const userList = weeklySleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
@@ -93,7 +93,7 @@ class Sleep {
         return sleepInfo.userID === userID;
       });
 
-      console.log('userData >>>>>>>>', currentUserData);
+      // console.log('userData >>>>>>>>', currentUserData);
 
       const userTotal = currentUserData.reduce((total, userSleepData) => {
         total += userSleepData.sleepQuality
@@ -102,7 +102,7 @@ class Sleep {
 
       const qualityAverage = userTotal / currentUserData.length;
 
-      console.log('qualityAverage >>>>>>>>', qualityAverage);
+      // console.log('qualityAverage >>>>>>>>', qualityAverage);
 
       if (qualityAverage > 3) {
         topSleepers.push({[userID] : qualityAverage});
@@ -111,7 +111,7 @@ class Sleep {
 
       }
 
-      console.log('topSleepers >>>>>>>>', topSleepers);
+      // console.log('topSleepers >>>>>>>>', topSleepers);
 
       return topSleepers; 
     }, []);
@@ -120,6 +120,20 @@ class Sleep {
 
     return topSleepers;
 
+  }
+
+  findLongestNightlySleeper(date) {
+    // input: date, sleepData array,
+    // output: userID of top sleeper
+    // methods: filter and sort
+    const nightlyData = this.sleepData.filter(sleepDataOb => {
+      return sleepDataOb.date === date
+    })
+    const compareHours = nightlyData.sort((a, b) => {
+      return b.hoursSlept - a.hoursSlept
+    })
+    console.log(compareHours)
+    return compareHours[0].userID;
   }
 
 }
