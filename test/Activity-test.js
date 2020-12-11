@@ -343,7 +343,13 @@ describe('Activity', () => {
   });
 
   it('should be an instance of the Activity class', () => {
-    
+    expect(activity).to.be.an.instanceof(Activity);
+  })
+
+  it('should calculate the number of miles a user has walked in a day', () => {
+    const dailyMilesWalked = activity.calculateMiles(2, '2019/06/15', userRepo);
+    expect(dailyMilesWalked).to.be.a('number');
+    expect(dailyMilesWalked).to.equal(3.66);
   })
 
 });
