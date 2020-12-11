@@ -451,8 +451,8 @@ describe('Sleep', () => {
 
   it('should find the user who slept the most on a given date', () => {
     const longestSleeper = sleep.findLongestNightlySleeper('2019/06/20');
-    expect(longestSleeper).to.be.a('number');
-    expect(longestSleeper).to.equal(2);
+    expect(longestSleeper).to.be.an('object');
+    expect(longestSleeper).to.deep.equal({ '2': 10.1 });
   })
 
 });

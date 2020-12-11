@@ -60,80 +60,42 @@ class Sleep {
   }
 
   findBestQualitySleepers(date) {
-    // Input: date
-    // Out: array of userIDs with sleep quality average above 3 for a given week
-    // dataset of the week
-
-    // calculate sleep quality ave of all users
-    // return userID of users with sleep quality > 3
-    // const usersWeeklyData = userArray.iterate(user => user[userID] this.findSleepDataByWeek(userID, date, 'sleepQuality')
-    // usersWeeklyData.calculateAllUsersSleepDataAverage(dataMetric)
-
     const startDate = new Date(date);
     const endDate = new Date(Number(startDate));
     endDate.setDate(endDate.getDate() + 7);
-
     const weeklySleepData = this.sleepData.filter(sleepInfo => {
-
       const sleepInfoDate = new Date(sleepInfo.date);
-
       return ((sleepInfoDate >= startDate) && (sleepInfoDate <= endDate))
-
     })
-
-    // console.log('weeklySleepData OUT REDUCE >>>>>>>>', weeklySleepData);
-
     const userList = weeklySleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
-
     const topSleepers = totalUsers.reduce((topSleepers, userID) => {
-
       const currentUserData = weeklySleepData.filter(sleepInfo => {
-
         return sleepInfo.userID === userID;
       });
-
-      // console.log('userData >>>>>>>>', currentUserData);
-
       const userTotal = currentUserData.reduce((total, userSleepData) => {
         total += userSleepData.sleepQuality
         return total;
       }, 0);
-
       const qualityAverage = userTotal / currentUserData.length;
-
-      // console.log('qualityAverage >>>>>>>>', qualityAverage);
-
       if (qualityAverage > 3) {
         topSleepers.push({[userID] : qualityAverage});
-
-        // Do we actually want to return key: value pairs to include the user's average for that week? {userID: qualityAverage}
-
       }
-
-      // console.log('topSleepers >>>>>>>>', topSleepers);
-
       return topSleepers; 
     }, []);
-
-    console.log('topSleepers >>>>>>>>', topSleepers);
-
     return topSleepers;
-
   }
 
   findLongestNightlySleeper(date) {
-    // input: date, sleepData array,
-    // output: userID of top sleeper
-    // methods: filter and sort
     const nightlyData = this.sleepData.filter(sleepDataOb => {
       return sleepDataOb.date === date
-    })
-    const compareHours = nightlyData.sort((a, b) => {
+    });
+    const sortedByHours = nightlyData.sort((a, b) => {
       return b.hoursSlept - a.hoursSlept
-    })
-    console.log(compareHours)
-    return compareHours[0].userID;
+    });
+    const winnerID =  sortedByHours[0].userID;
+    const winnerHours = sortedByHours[0].hoursSlept;
+    return { [winnerID] : winnerHours }
   }
 
 }
