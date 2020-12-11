@@ -352,4 +352,16 @@ describe('Activity', () => {
     expect(dailyMilesWalked).to.equal(3.66);
   })
 
+  it('should return a user\'s number of active minutes for a given day', () => {
+    const dailyActiveMinutes = activity.returnActiveMinutes(3, '2019/06/19');
+    expect(dailyActiveMinutes).to.be.a('number');
+    expect(dailyActiveMinutes).to.equal(188);
+  })
+  
+  it('should calculate a user\'s weekly average number of active minutes', () => {
+    const weeklyAverageActiveMinutes = activity.calculateWeeklyAverageActiveMinutes(2, '2019/06/15');
+    expect(weeklyAverageActiveMinutes).to.be.a('number');
+    expect(weeklyAverageActiveMinutes).to.equal(152.38)
+  })
+
 });
