@@ -15,7 +15,7 @@ class Hydration {
     return Math.floor(totalWaterIntake / currentUserHydrationData.length);
   }
 
-  findDataByUser(userID){
+  findDataByUser(userID) {
     const currentUserHydrationData = this.hydrationData.filter(hydrationInfo => {
       return hydrationInfo.userID === userID
     });
@@ -25,7 +25,7 @@ class Hydration {
   findDataByDate(date, currentUserData) {
     const dailyData = currentUserData.find(hydrationInfo => {
       return hydrationInfo.date === date
-      });
+    });
     return dailyData;
   }
 
