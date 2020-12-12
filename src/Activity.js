@@ -50,6 +50,17 @@ class Activity {
     const averageActiveMinutes = (totalActiveMinutes / userWeeklyActivityData.length).toFixed(2);
     return parseFloat(averageActiveMinutes);
   }
+
+  calculateStepGoalSuccess(userID, date, repository) {
+    const currentUserActivityData = this.filterDataByUser(userID);
+    const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
+    const currentUser = repository.userData.find(user => user.id === userID);
+    if (dailyActivityData.numSteps >= currentUser.dailyStepGoal) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 
 module.exports = Activity
