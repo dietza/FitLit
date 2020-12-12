@@ -344,47 +344,69 @@ describe('Activity', () => {
 
   it('should be an instance of the Activity class', () => {
     expect(activity).to.be.an.instanceof(Activity);
-  })
+  });
 
   it('should calculate the number of miles a user has walked in a day', () => {
     const dailyMilesWalked = activity.calculateMiles(2, '2019/06/15', userRepo);
     expect(dailyMilesWalked).to.be.a('number');
     expect(dailyMilesWalked).to.equal(3.66);
-  })
+  });
 
   it('should return a user\'s number of active minutes for a given day', () => {
     const dailyActiveMinutes = activity.returnActiveMinutes(3, '2019/06/19');
     expect(dailyActiveMinutes).to.be.a('number');
     expect(dailyActiveMinutes).to.equal(188);
-  })
+  });
   
   it('should calculate a user\'s weekly average number of active minutes', () => {
     const weeklyAverageActiveMinutes = activity.calculateWeeklyAverageActiveMinutes(2, '2019/06/15');
     expect(weeklyAverageActiveMinutes).to.be.a('number');
     expect(weeklyAverageActiveMinutes).to.equal(152.38)
-  })
+  });
 
   it('should return if a user reached their step goal on a specific date', () => {
     const stepGoalSuccess = activity.calculateStepGoalSuccess(4, '2019/06/16', userRepo);
     expect(stepGoalSuccess).to.be.a('boolean');
     expect(stepGoalSuccess).to.equal(true);
-  })
+  });
 
-  it('should return an array of successful step goal days for all time', () => {
+  it('should return an array of dates a user successfully met their step goal (for all time)', () => {
     const stepGoalSuccessDates = activity.returnSuccessfulStepDates(1, userRepo);
     expect(stepGoalSuccessDates).to.be.an('array');
     expect(stepGoalSuccessDates).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23']);
-  })
+  });
 
-  it('should return the most flights of stairs climbed in one day', () => {
-    const stairClimbingRecord = activity.findStairClimbingRecord(2);
-    expect(stairClimbingRecord).to.be.a('string');
-    expect(stairClimbingRecord).to.equal('2019/06/19');
-  })
+  it('should return the highest number of flights of stairs a user has climbed in one day', () => {
+    const stairClimbingRecord = activity.findUserStairClimbingRecord(3);
+    expect(stairClimbingRecord).to.be.an('object');
+    expect(stairClimbingRecord).to.deep.equal({ '2019/06/20': 46 });
+  });
 
   it('should calculate the average number of flights of stairs climbed by all users on a specific date', () => {
-    console.log('activityInfo.date >>>>>>>>>>>', activityInfo.date);
+    const allUsersStairsAverage1 = activity.findAllUsersAverageByDate("2019/06/15", "flightsOfStairs");
+    const allUsersStairsAverage2 = activity.findAllUsersAverageByDate("2019/06/22", "flightsOfStairs");
+    expect(allUsersStairsAverage1).to.be.an('number');
+    expect(allUsersStairsAverage1).to.equal(22.75);
+    expect(allUsersStairsAverage2).to.be.an('number');
+    expect(allUsersStairsAverage2).to.equal(18.25);
+  });
 
-  })
+  it('should calculate the average step count for all users on a specific date', () => {
+    const allUsersStepsAverage1 = activity.findAllUsersAverageByDate("2019/06/17", "numSteps");
+    const allUsersStepsAverage2 = activity.findAllUsersAverageByDate("2019/06/23", "numSteps");
+    expect(allUsersStepsAverage1).to.be.an('number');
+    expect(allUsersStepsAverage1).to.equal(10196.5);
+    expect(allUsersStepsAverage2).to.be.an('number');
+    expect(allUsersStepsAverage2).to.equal(8718.75);
+  });
+
+  it('should calculate the average active minutes for all users on a specific date', () => {
+    const allUsersActiveMinutesAverage1 = activity.findAllUsersAverageByDate("2019/06/18", "minutesActive");
+    const allUsersActiveMinutesAverage2 = activity.findAllUsersAverageByDate("2019/06/21", "minutesActive");
+    expect(allUsersActiveMinutesAverage1).to.be.an('number');
+    expect(allUsersActiveMinutesAverage1).to.equal(185);
+    expect(allUsersActiveMinutesAverage2).to.be.an('number');
+    expect(allUsersActiveMinutesAverage2).to.equal(162.5);
+  });
 
 });

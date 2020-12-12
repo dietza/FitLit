@@ -17,6 +17,13 @@ class Activity {
     return dailyData;
   }
 
+  filterDataByDate(date) {
+    const dailyActivityData = this.activityData.filter(activityInfo => {
+      return activityInfo.date === date
+    });
+    return dailyActivityData;
+  }
+
   calculateMiles(userID, date, repository) {
     const currentUserActivityData = this.filterDataByUser(userID);
     const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
@@ -69,6 +76,24 @@ class Activity {
       }
     });
     return stepGoalSuccessDates;
+  }
+
+  findUserStairClimbingRecord(userID) {
+    const currentUserActivityData = this.filterDataByUser(userID);
+    const sortedByStairsClimbed = currentUserActivityData.sort((a, b) => {
+      return b.flightsOfStairs - a.flightsOfStairs;
+    })
+    return {[sortedByStairsClimbed[0].date]: sortedByStairsClimbed[0].flightsOfStairs}
+  }
+
+  findAllUsersAverageByDate(date, dataMetric) {
+    const dailyActivityData = this.filterDataByDate(date);
+    const allUsersDailyTotal = dailyActivityData.reduce((sum, activityInfo) => {
+      sum += activityInfo[dataMetric];
+      return sum;
+    }, 0);
+    const allUsersDailyAverage = allUsersDailyTotal / dailyActivityData.length;
+    return allUsersDailyAverage;
   }
 }
 
