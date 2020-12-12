@@ -1,5 +1,3 @@
-const UserRepository = require("./UserRepository");
-
 class Activity {
   constructor(activityData) {
     this.activityData = activityData
@@ -60,6 +58,17 @@ class Activity {
     } else {
       return false
     }
+  }
+
+  returnSuccessfulStepDates(userID, repository) {
+    const currentUserActivityData = this.filterDataByUser(userID);
+    const stepGoalSuccessDates = [];
+    currentUserActivityData.forEach(activityInfo => {
+      if (this.calculateStepGoalSuccess(userID, activityInfo.date, repository)) {
+        stepGoalSuccessDates.push(activityInfo.date);
+      }
+    });
+    return stepGoalSuccessDates;
   }
 }
 

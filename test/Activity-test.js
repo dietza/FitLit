@@ -371,9 +371,9 @@ describe('Activity', () => {
   })
 
   it('should return an array of successful step goal days for all time', () => {
-    const stepGoalSuccessDates = activity.returnSuccessfulStepDates(1, '2019/06/15');
-    expect(stepGoalSuccess).to.be.an('array');
-    expect(stepGoalSuccess).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23']);
+    const stepGoalSuccessDates = activity.returnSuccessfulStepDates(1, userRepo);
+    expect(stepGoalSuccessDates).to.be.an('array');
+    expect(stepGoalSuccessDates).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22', '2019/06/23']);
   })
 
   it('should return the most flights of stairs climbed in one day', () => {
@@ -383,6 +383,7 @@ describe('Activity', () => {
   })
 
   it('should calculate the average number of flights of stairs climbed by all users on a specific date', () => {
+    console.log('activityInfo.date >>>>>>>>>>>', activityInfo.date);
 
   })
 
