@@ -1,3 +1,107 @@
-@media Screen and (min-width: 600px) {
+* {
+  border: 1px solid red;
+  text-align: center;
+  margin: 0;
+  display: block;
+}
+
+.user-info {
+  /* height: auto; */
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 20% 80%;
+  grid-template-areas: 
+      "a"
+      "b";
+}
+
+.user-info__greeting {
+  text-align: center;
+  grid-area: a;
+}
+
+.user-info__basic-display {
+  list-style-type: none;
+  grid-area: b;
+  padding: 0;
+}
+
+.hydration {
+  padding: 0%;
+}
+
+/* .sleep {
   
+}
+
+.sleep__current {
+  
+} */
+
+.sleep__week {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 15% 85%;
+  grid-template-areas: 
+      "a a"
+      "b c";
+}
+
+.sleep__week-title {
+  grid-area: a;
+}
+
+.sleep__week-hours {
+  padding: 0%;
+  grid-area: b;
+}
+
+.sleep__week-quality {
+  padding: 0%;
+  grid-area: c;
+}
+
+.activity__current {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+      "a b";
+}
+
+.activity__current-user {
+  padding: 0%;
+  grid-area: a;
+}
+
+.activity__current-all-users {
+  padding: 0%;
+  grid-area: b;
+}
+
+.activity__week {
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+      "a b c";
+}
+
+.activity__week-steps {
+  padding: 0%;
+  grid-area: a;
+}
+
+.activity__week-stairs {
+  padding: 0%;
+  grid-area: b;
+}
+
+.activity__week-minutes {
+  padding: 0%;
+  grid-area: c;
+}
+
+@media Screen and (min-width: 600px) {
+
 }
