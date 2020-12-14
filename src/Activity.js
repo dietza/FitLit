@@ -2,6 +2,14 @@ class Activity {
   constructor(activityData) {
     this.activityData = activityData
   }
+
+  returnLatestDate() {
+    const sortedByDates = this.activityData.sort((a, b) => {
+      return a.date - b.date;
+    });
+    const latestDate = sortedByDates[sortedByDates.length - 1].date;
+    return latestDate;
+  }
   
   filterDataByUser(userID) {
     const currentUserActivityData = this.activityData.filter(activityInfo => {
@@ -97,5 +105,6 @@ class Activity {
   }
 }
 
-module.exports = Activity
-
+if (typeof module !== 'undefined') {
+  module.exports = Activity;
+}
