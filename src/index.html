@@ -2,10 +2,75 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
     <title>Activity Tracker</title>
   </head>
   <body>
     <h1>Activity Tracker</h1>
+    <section class="user-info">
+      <h2 class="user-info__greeting">Hello, User.Username!</h2>
+      <ul class="user-info__basic-display">
+        <li class="user-info__stride-length">strideLength: 4.5</li>
+        <li class="user-info__friends"> frenz
+          <ul>
+            <li class="friend1">frendo1</li>
+            <li class="friend2">frendus2</li>
+            <li class="friend3">frendling3</li>
+          </ul>
+        </li>
+        <li class="user-info__step-goal">My dailyStepGoal: 5000</li>
+        <li class="user-info__average-step-goal">Average daily Step Goal: 7250 </li>
+      </ul>
+    </section>
+
+    <section class="hydration">
+      <h2 class="hydration__title">you drank</h2>
+      <h2 class="hydration__current">32</h2>
+      <h2 class="hydration__title">ounces</h2>
+      <ul class="hydration__week">
+        <li class="hydration__week1">21: 2019/06/15</li>
+        <li class="hydration__week2">40: 2019/06/16</li>
+        <li class="hydration__week3">36: 2019/06/17</li>
+        <li class="hydration__week4">62: 2019/06/18</li>
+        <li class="hydration__week5">51: 2019/06/19</li>
+        <li class="hydration__week6">58: 2019/06/20</li>
+        <li class="hydration__week7">62: 2019/06/21</li>
+      </ul>
+    </section>
+
+    <section class="sleep">
+      <article class="sleep__current">
+        <h2 class="sleep__title">Sleep</h2>
+        <h3 class="sleep__current-hours">9 hours</h3>
+        <h3 class="sleep__current-quality">3.9 quality</h3>
+      </article>
+      <article class="sleep__week">this week
+        <ul class="sleep__week-hours">hour
+          <li class="sleep__hours-day1">8.3</li>
+          <li class="sleep__hours-day2">9.2</li>
+          <li class="sleep__hours-day3">9.2</li>
+          <li class="sleep__hours-day4">3.8</li>
+          <li class="sleep__hours-day5">7.5</li>
+          <li class="sleep__hours-day6">8</li>
+          <li class="sleep__hours-day7">9.2</li>
+        </ul>
+        <ul class="sleep__week-quality">quality
+          <li class="sleep__quality-day1">2.3</li>
+          <li class="sleep__quality-day2">4.3</li>
+          <li class="sleep__quality-day3">2.8</li>
+          <li class="sleep__quality-day4">4.2</li>
+          <li class="sleep__quality-day5">3.3</li>
+          <li class="sleep__quality-day6">1.8</li>
+          <li class="sleep__quality-day7">2.3</li>
+        </ul>
+      </article>
+      <article class="sleep__averages">
+        <h2 class="sleep__averages-title">your averages</h2>
+        <p class="sleep__averages-hours">8.6</p>
+        <p class="sleep__averages-quality">2.8</p>
+      </article>
+    </section>
 
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/hydration.js"></script>
