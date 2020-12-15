@@ -64,16 +64,19 @@ const showActivityInfo = () => {
   activityInfo = new Activity(activityData);
   today = activity.returnLatestDate();
   const currentUserActivity = activityInfo.findDataByDate(today, currentUser);
+  const userWeeklySteps = activityInfo.returnUserWeeklyData(today, currentUser, 'numSteps');
   activityCurrentSteps.innerText = currentUserActivity.numSteps;
   activityCurrentMinutes.innerText = currentUserActivity.minutesActive;
   activityCurrentMiles.innerText = activityInfo.calculateMiles(currentUser.id, today, userRepo);
-  activityWeekSteps.innnerHTML = `<li class="activity__steps-day1">${}</li>
-  <li class="activity__steps-day2">9.2</li>
-  <li class="activity__steps-day3">9.2</li>
-  <li class="activity__steps-day4">3.8</li>
-  <li class="activity__steps-day5">7.5</li>
-  <li class="activity__steps-day6">8</li>
-  <li class="activity__steps-day7">9.2</li>`
+  activityWeekSteps.innnerHTML = `
+  <li class="activity__steps-day1">${userWeeklySteps[0]}</li>
+  <li class="activity__steps-day2">${userWeeklySteps[1]}</li>
+  <li class="activity__steps-day3">${userWeeklySteps[2]}</li>
+  <li class="activity__steps-day4">${userWeeklySteps[3]}</li>
+  <li class="activity__steps-day5">${userWeeklySteps[4]}</li>
+  <li class="activity__steps-day6">${userWeeklySteps[5]}</li>
+  <li class="activity__steps-day7">${userWeeklySteps[6]}</li>
+  `
 }
 
 const showHydrationInfo = () => {
