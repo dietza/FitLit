@@ -43,6 +43,8 @@ const pageLoad = () => {
   currentUser = userRepo[0];
   userFirstName.innerText = `Hello! ${currentUser.returnUserFirstName()}!`;
   showUserInfo();
+  showActivityInfo();
+  showHydrationInfo();
 };
 
 const showUserInfo = () => {
@@ -61,6 +63,17 @@ const showUserInfo = () => {
 const showActivityInfo = () => {
   activityInfo = new Activity(activityData);
   today = activity.returnLatestDate();
+  const currentUserActivity = activityInfo.findDataByDate(today, currentUser);
+  activityCurrentSteps.innerText = currentUserActivity.numSteps;
+  activityCurrentMinutes.innerText = currentUserActivity.minutesActive;
+  activityCurrentMiles.innerText = activityInfo.calculateMiles(currentUser.id, today, userRepo);
+  activityWeekSteps.innnerHTML = `<li class="activity__steps-day1">${}</li>
+  <li class="activity__steps-day2">9.2</li>
+  <li class="activity__steps-day3">9.2</li>
+  <li class="activity__steps-day4">3.8</li>
+  <li class="activity__steps-day5">7.5</li>
+  <li class="activity__steps-day6">8</li>
+  <li class="activity__steps-day7">9.2</li>`
 }
 
 const showHydrationInfo = () => {
