@@ -103,5 +103,36 @@
 }
 
 @media Screen and (min-width: 600px) {
+  body {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 30% 35% 35%;
+    grid-template-rows: 10% auto auto auto;
+    grid-template-areas: 
+      "title title title"
+      "user-info user-info hydration"
+      "activity activity sleep"
+      "activity activity none";
+  }
 
+  .title {
+    grid-area: title;
+  }
+
+  .user-info {
+    grid-area: user-info;
+  }
+
+  .hydration {
+    grid-area: hydration;
+  }
+
+  .sleep {
+    grid-area: sleep;
+  }
+
+  .activity {
+    grid-area: activity;
+  }
+  
 }
