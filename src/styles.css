@@ -3,6 +3,11 @@
   text-align: center;
   margin: 0;
   display: block;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+html {
+  height: 100vh;
 }
 
 .user-info {
@@ -27,6 +32,10 @@
 }
 
 .hydration {
+  padding: 0%;
+}
+
+.hydration__week {
   padding: 0%;
 }
 
@@ -102,17 +111,17 @@
   grid-area: c;
 }
 
-@media Screen and (min-width: 600px) {
+@media Screen and (min-width: 480px) {
   body {
     height: 100%;
     display: grid;
     grid-template-columns: 30% 35% 35%;
-    grid-template-rows: 10% auto auto auto;
+    grid-template-rows: 10% 40% 50%;
     grid-template-areas: 
       "title title title"
       "user-info user-info hydration"
       "activity activity sleep"
-      "activity activity none";
+      "activity activity sleep";
   }
 
   .title {
@@ -135,4 +144,16 @@
     grid-area: activity;
   }
   
+}
+
+@media Screen and (min-width: 1200px) {
+  body {
+    grid-template-columns: 10% auto auto auto 10%;
+    grid-template-rows: 10% 40% 50%;
+    grid-template-areas: 
+      "none title title title"
+      "none user-info user-info hydration"
+      "none activity activity sleep"
+      "none activity activity sleep";
+  }
 }
