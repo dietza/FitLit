@@ -8,7 +8,8 @@ class UserRepository {
       sum += user.dailyStepGoal;
       return sum;
     }, 0);
-    return stepGoalsTotal / this.userData.length;
+    const stepGoalAverage = stepGoalsTotal / this.userData.length;
+    return stepGoalAverage;
   }
 
   findUser(userID) {
@@ -20,4 +21,6 @@ class UserRepository {
 
 }
 
-module.exports = UserRepository;
+if (typeof module !== 'undefined') {
+  module.exports = UserRepository;
+}

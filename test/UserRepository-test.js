@@ -152,6 +152,7 @@ describe('UserRepository', () => {
 
   it('should calculate the average step goal of all users', () => {
     const averageStepGoal = userRepo.calculateAverageStepGoal();
+    expect(averageStepGoal).to.be.a('number');
     expect(averageStepGoal).to.equal(7250);
   });
 
@@ -166,6 +167,6 @@ describe('UserRepository', () => {
       dailyStepGoal: 11000,
       friends: [ 11, 48, 15 ]
     })
-  })
+  });
 
 });

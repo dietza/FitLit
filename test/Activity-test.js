@@ -385,28 +385,30 @@ describe('Activity', () => {
   it('should calculate the average number of flights of stairs climbed by all users on a specific date', () => {
     const allUsersStairsAverage1 = activity.findAllUsersAverageByDate("2019/06/15", "flightsOfStairs");
     const allUsersStairsAverage2 = activity.findAllUsersAverageByDate("2019/06/22", "flightsOfStairs");
-    expect(allUsersStairsAverage1).to.be.an('number');
+    expect(allUsersStairsAverage1).to.be.a('number');
     expect(allUsersStairsAverage1).to.equal(22.75);
-    expect(allUsersStairsAverage2).to.be.an('number');
+    expect(allUsersStairsAverage2).to.be.a('number');
     expect(allUsersStairsAverage2).to.equal(18.25);
   });
 
   it('should calculate the average step count for all users on a specific date', () => {
     const allUsersStepsAverage1 = activity.findAllUsersAverageByDate("2019/06/17", "numSteps");
     const allUsersStepsAverage2 = activity.findAllUsersAverageByDate("2019/06/23", "numSteps");
-    expect(allUsersStepsAverage1).to.be.an('number');
+    expect(allUsersStepsAverage1).to.be.a('number');
     expect(allUsersStepsAverage1).to.equal(10196.5);
-    expect(allUsersStepsAverage2).to.be.an('number');
+    expect(allUsersStepsAverage2).to.be.a('number');
     expect(allUsersStepsAverage2).to.equal(8718.75);
   });
 
   it('should calculate the average active minutes for all users on a specific date', () => {
     const allUsersActiveMinutesAverage1 = activity.findAllUsersAverageByDate("2019/06/18", "minutesActive");
     const allUsersActiveMinutesAverage2 = activity.findAllUsersAverageByDate("2019/06/21", "minutesActive");
-    expect(allUsersActiveMinutesAverage1).to.be.an('number');
+    expect(allUsersActiveMinutesAverage1).to.be.a('number');
     expect(allUsersActiveMinutesAverage1).to.equal(185);
-    expect(allUsersActiveMinutesAverage2).to.be.an('number');
+    expect(allUsersActiveMinutesAverage2).to.be.a('number');
     expect(allUsersActiveMinutesAverage2).to.equal(162.5);
+
+    activity.returnLatestDate();
   });
 
 });
