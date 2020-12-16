@@ -35,7 +35,6 @@ class Sleep {
     return dailySleepData[dataMetric];
   }
 
-
   findSleepDataByWeek(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
     const endDate = new Date(date);
@@ -54,8 +53,6 @@ class Sleep {
     console.log('weeklyDataByMetric >>>>>>>', weeklyDataByMetric);
     return weeklyDataByMetric;
   }
-
-
 
   calculateAllUsersSleepDataAverage(dataMetric) {
     const dateList = this.sleepData.map(info => info.date);
