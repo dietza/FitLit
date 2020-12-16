@@ -35,17 +35,27 @@ class Sleep {
     return dailySleepData[dataMetric];
   }
 
+
   findSleepDataByWeek(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
-    const startDate = currentUserData.find(info => info.date === date);
-    const startIndex = currentUserData.indexOf(startDate);
-    const endIndex = startIndex + 7;
-    // RETURN TO FIX ENDINDEX CALUCULATION
-    const weeklyDates = currentUserData.slice(startIndex, endIndex);
-    // CHECK WEEKLYDATES IS RETURNING EXPECTED
-    const weeklySleepData = weeklyDates.map(info => info[dataMetric])
-    return weeklySleepData;
+    const endDate = new Date(date);
+    const startDate = new Date(Number(endDate));
+    startDate.setDate(startDate.getDate() - 6);
+    const weeklyData = currentUserData.filter(sleepInfo => {
+      const sleepInfoDate = new Date(sleepInfo.date);
+      if ((sleepInfoDate >= startDate) && (sleepInfoDate <= endDate)) {
+        return sleepInfo;
+      }
+    })
+    const weeklyDataByMetric = weeklyData.map(sleepInfo => {
+      return this.returnDailySleepData(userID, sleepInfo.date, dataMetric);
+    })
+
+    console.log('weeklyDataByMetric >>>>>>>', weeklyDataByMetric);
+    return weeklyDataByMetric;
   }
+
+
 
   calculateAllUsersSleepDataAverage(dataMetric) {
     const dateList = this.sleepData.map(info => info.date);
