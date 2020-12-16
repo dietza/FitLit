@@ -38,8 +38,8 @@ class Hydration {
   findWeeklyWaterIntake(userID, date) {
     const currentUserData = this.findDataByUser(userID);
     const startDate = currentUserData.find(info => info.date === date);
-    const startIndex = currentUserData.indexOf(startDate);
-    const endIndex = startIndex + 7;
+    const endIndex = currentUserData.indexOf(startDate);
+    const startIndex = endIndex - 7;
     const weeklyDates = currentUserData.slice(startIndex, endIndex);
     const weeklyOunceCounts = weeklyDates.map(info => info.numOunces)
     return weeklyOunceCounts;
