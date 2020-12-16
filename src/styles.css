@@ -2,7 +2,6 @@
   border: 1px solid red;
   text-align: center;
   margin: 0;
-  display: block;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
@@ -10,6 +9,9 @@ html {
   height: 100vh;
 }
 
+li {
+  list-style-type: none;
+}
 .user-info {
   /* height: auto; */
   display: grid;
