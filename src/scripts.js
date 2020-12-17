@@ -44,8 +44,8 @@ let hydrationInfo;
 let sleepInfo
 
 const pageLoad = () => {
-  currentUser = userRepo.userData[47];
-  userFirstName.innerText = `Hello! ${currentUser.returnUserFirstName()}!`;
+  currentUser = userRepo.userData[25];
+  userFirstName.innerText = `Hello, ${currentUser.returnUserFirstName()}!`;
   showUserInfo();
   showActivityInfo();
   showHydrationInfo();
@@ -65,7 +65,7 @@ const showUserInfo = () => {
     const userFriend = userRepo.findUser(friend)
     return userFriend.name
   })
-  userInfoDisplay.innerHTML = `<li class="user-info__stride-length">Stride: ${currentUser.strideLength}</li>
+  userInfoDisplay.innerHTML = `<li class="user-info__stride-length">Stride: ${currentUser.strideLength} feet </li>
   <li class="user-info__step-goal">Daily Step Goal: ${currentUser.dailyStepGoal}</li>
   <li class="user-info__average-step-goal">Average Daily Step Goal: ${userRepo.calculateAverageStepGoal()}</li>
   `;
