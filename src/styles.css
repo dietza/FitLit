@@ -2,7 +2,12 @@
   /* border: 1px solid red; */
   text-align: center;
   margin: 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Jura', sans-serif;
+}
+
+body {
+  background-color: #262046;
+  color: white;
 }
 
 li, ul {
@@ -10,9 +15,11 @@ li, ul {
 }
 
 .card {
+  background-color: #342C63;
+  color: white;
   margin: 3%;
   border-radius: 16px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px 10px black;
   cursor: pointer;
   text-align: center;
   -webkit-transition: transform 0.5s;
@@ -25,6 +32,7 @@ li, ul {
 }
 
 .flip {
+  color: white;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
