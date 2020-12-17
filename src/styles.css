@@ -15,8 +15,8 @@ li, ul {
 }
 
 .card {
-  background-color: #342C63;
   color: white;
+  /* background-color: #342C63; */
   margin: 3%;
   border-radius: 16px;
   box-shadow: 0 5px 10px black;
@@ -45,12 +45,14 @@ li, ul {
 }
 
 .card__front {
+  color: white;
   height: 300px;
   transform: rotateX(0deg);
   -webkit-transform: rotateX(0deg);
 }
 
 .card__back {
+  color: white;
   width: 100%;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
