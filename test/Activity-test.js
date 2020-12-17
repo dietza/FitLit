@@ -413,8 +413,34 @@ describe('Activity', () => {
     expect(allUsersActiveMinutesAverage1).to.equal(185);
     expect(allUsersActiveMinutesAverage2).to.be.a('number');
     expect(allUsersActiveMinutesAverage2).to.equal(162.5);
+  });
 
-    activity.returnLatestDate();
+  it('should return a list of the user\'s step counts for a week', () => {
+    const weekStepCounts = activity.findWeeklyActivityCounts(1, '2019/06/15', 'numSteps');
+    const weekStepCounts2 = activity.findWeeklyActivityCounts(3, '2019/06/22', 'numSteps');
+    expect(weekStepCounts.length).to.equal(1);
+    expect(weekStepCounts).to.deep.equal([3577]);
+    expect(weekStepCounts2.length).to.equal(7);
+    expect(weekStepCounts2).to.deep.equal([12304,  4547, 2546, 10961, 5369,  7498, 11342]);
+  });
+
+  it('should return a list of the user\'s number of minutes active for a week', () => {
+    const weekStepCounts = activity.findWeeklyActivityCounts(1, '2019/06/17', 'minutesActive');
+    const weekStepCounts2 = activity.findWeeklyActivityCounts(3, '2019/06/22', 'minutesActive');
+    expect(weekStepCounts.length).to.equal(3);
+    expect(weekStepCounts).to.deep.equal([140, 175, 168]);
+    expect(weekStepCounts2.length).to.equal(7);
+    expect(weekStepCounts2).to.deep.equal([152,  97, 274, 188, 129, 199, 53]);
+  });
+
+  it('should return a list of the user\'s number of flights of stairs climbed for a week', () => {
+    const weekStepCounts = activity.findWeeklyActivityCounts(1, '2019/06/15', 'flightsOfStairs');
+    const weekStepCounts2 = activity.findWeeklyActivityCounts(3, '2019/06/23', 'flightsOfStairs');
+    expect(weekStepCounts.length).to.equal(1);
+    expect(weekStepCounts).to.deep.equal([16]);
+    expect(weekStepCounts2.length).to.equal(7);
+    expect(weekStepCounts2).to.deep.equal([5, 26, 17,
+      46, 13, 17, 9]);
   });
 
 });

@@ -10,6 +10,13 @@ class Activity {
     const latestDate = sortedByDates[sortedByDates.length - 1].date;
     return latestDate;
   }
+
+  findWeeklyActivityCounts(userID, date, dataMetric) {
+    const currentUserData = this.filterDataByUser(userID);
+    const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
+    const weeklyActivityCounts = weeklyData.map(info => info[dataMetric]);
+    return weeklyActivityCounts;
+  }
   
   filterDataByUser(userID) {
     const currentUserActivityData = this.activityData.filter(activityInfo => {
@@ -100,12 +107,12 @@ class Activity {
   }
 
   findAllUsersAverageByDate(date, dataMetric) {
-    const dailyActivityData = this.filterDataByDate(date);
-    const allUsersDailyTotal = dailyActivityData.reduce((sum, activityInfo) => {
+    const allUsersDailyActivityData = this.filterDataByDate(date);
+    const allUsersDailyTotal = allUsersDailyActivityData.reduce((sum, activityInfo) => {
       sum += activityInfo[dataMetric];
       return sum;
     }, 0);
-    const allUsersDailyAverage = allUsersDailyTotal / dailyActivityData.length;
+    const allUsersDailyAverage = allUsersDailyTotal / allUsersDailyActivityData.length;
     return allUsersDailyAverage;
   }
 }
