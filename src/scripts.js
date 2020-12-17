@@ -1,9 +1,10 @@
 const userFirstName = document.querySelector('.user-info__greeting');
 const userInfoDisplay = document.querySelector('.user-info__basic-display');
+let userFriendsDisplay = document.querySelector('.user-info__friends')
 
 const hydrationCurrentCount = document.querySelector('.hydration__current');
 const hydrationDate = document.querySelector('.hydration__date');
-let hydrationWeek = document.querySelector('.hydration__week');
+let hydrationWeek = document.querySelector('.hydration__week-list');
 
 const sleepCurrentHours = document.querySelector('.sleep__current-hours');
 const sleepCurrentQuality = document.querySelector('.sleep__current-quality');
@@ -37,14 +38,14 @@ let allUsers = userData.map(userInfo => {
 
 let userRepo = new UserRepository(allUsers);
 
-let today = '2019/06/25'
+let today = '2019/06/22'
 let currentUser;
 let activityInfo;
 let hydrationInfo;
 let sleepInfo
 
 const pageLoad = () => {
-  currentUser = userRepo.userData[11];
+  currentUser = userRepo.userData[22];
   userFirstName.innerText = `Hello! ${currentUser.returnUserFirstName()}!`;
   showUserInfo();
   showActivityInfo();
@@ -66,15 +67,10 @@ const showUserInfo = () => {
     return userFriend.name
   })
   userInfoDisplay.innerHTML = `<li class="user-info__stride-length">Stride: ${currentUser.strideLength}</li>
-  <li class="user-info__friends"> Friends
-    <ul class="user-info__friends-list">
-      <li class="friend1">${userFriends[0]}</li>
-      <li class="friend2">${userFriends[1]}</li>
-      <li class="friend3">${userFriends[2]}</li>
-    </ul>
-  </li>
   <li class="user-info__step-goal">Daily Step Goal: ${currentUser.dailyStepGoal}</li>
-  <li class="user-info__average-step-goal">Average Daily Step Goal: ${userRepo.calculateAverageStepGoal()}</li>`
+  <li class="user-info__average-step-goal">Average Daily Step Goal: ${userRepo.calculateAverageStepGoal()}</li>
+  `;
+  userFriendsDisplay = printList(userFriendsDisplay, userFriends);
 };
 
 const showActivityInfo = () => {
@@ -106,9 +102,10 @@ const showHydrationInfo = () => {
   hydrationInfo = new Hydration(hydrationData);
   const currentUserHydration = hydrationInfo.calculateDailyWaterIntake(currentUser.id, today)
   const userWeeklyDrank = hydrationInfo.findWeeklyWaterIntake(currentUser.id, today)
+  
   hydrationCurrentCount.innerText = currentUserHydration;
   hydrationDate.innerText = `on ${today}`;
-  hydrationWeek = printList(hydrationDate, userWeeklyDrank)
+  hydrationWeek = printList(hydrationWeek, userWeeklyDrank);
 }
 
 const showSleepInfo = () => {

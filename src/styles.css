@@ -1,15 +1,11 @@
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-html {
-  height: 100vh;
-}
-
-li {
+li, ul {
   list-style-type: none;
 }
 
@@ -52,40 +48,56 @@ li {
   -webkit-transform: rotateY(180deg);
   position: absolute;
   text-align: center;
+  right: 0;
+  left: 0;
+  top: 0;
 }
 
 .user-info {
-  /* height: auto; */
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 20% 80%;
   grid-template-areas: 
-      "a"
-      "b";
+      "a a"
+      "b c";
 }
 
 .user-info__greeting {
+  font-size: 2rem;
   text-align: center;
   grid-area: a;
 }
 
 .user-info__basic-display {
   list-style-type: none;
+  margin: auto;
   grid-area: b;
   padding: 0;
 }
 
+.user-info__friends {
+  list-style-type: none;
+  margin: auto;
+  grid-area: c;
+  padding: 0;
+}
+
 .hydration {
-  height: 275px;
+  justify-content: center;
+  align-content: center;
+  height: 350px;
   padding: 0%;
 }
 
 .hydration__week {
+  list-style-type: none;
   padding: 0%;
 }
 
 .sleep {
-  height: 400px;
+  justify-content: center;
+  align-content: center;
+  height: 350px;
 }
 
 .sleep__week {
@@ -109,6 +121,12 @@ li {
 .sleep__week-quality {
   padding: 0%;
   grid-area: c;
+}
+
+.activity {
+  justify-content: center;
+  align-content: center;
+  height: 350px;
 }
 
 .activity__current {
@@ -163,6 +181,10 @@ li {
       "user user"
       "activity hydration"
       "activity  sleep";
+  }
+
+  .card__front, .card__back {
+    height: 300px;
   }
 
   .title {

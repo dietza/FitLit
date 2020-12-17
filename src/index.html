@@ -12,34 +12,17 @@
       <h2 class="user-info__greeting">Hello, User.Username!</h2>
       <ul class="user-info__basic-display">
         <li class="user-info__stride-length">strideLength: 4.5</li>
-        <li class="user-info__friends"> frenz
-          <ul>
-            <li class="friend1">frendo1</li>
-            <li class="friend2">frendus2</li>
-            <li class="friend3">frendling3</li>
-          </ul>
-        </li>
         <li class="user-info__step-goal">My dailyStepGoal: 5000</li>
         <li class="user-info__average-step-goal">Average daily Step Goal: 7250 </li>
+      </ul>
+      <ul class="user-info__friends">YOUR FRIENDS
       </ul>
     </section>
 
     <section class="card">
       <section class="activity card__back">
-        <h2>Activity</h2>
-        <article class="activity__current">
-          <ul class="activity__current-user">Yours
-            <li class="activity__current-steps">10000 steps</li>
-            <li class="activity__current-minutes">33 minutes</li>
-            <li class="activity__current-miles">12 miles</li>
-          </ul>
-          <ul class="activity__current-all-users">Theirs
-            <li class="activity__current-average-steps">9875 steps</li>
-            <li class="activity__current-average-minutes">29 minutes</li>
-            <li class="activity__current-average-miles">8 miles</li>
-          </ul>
-        </article>
-        <article class="activity__week">this week
+        <h2>Weekly Activity</h2>
+        <article class="activity__week">
           <ul class="activity__week-steps">steps
             <li class="activity__steps-day1">8.3</li>
             <li class="activity__steps-day2">9.2</li>
@@ -70,36 +53,41 @@
         </article>
       </section>
       <section class="activity card__front">
-        <h2>This is the activity card</h2>
+        <h2>Activity</h2>
+        <article class="activity__current">
+          <ul class="activity__current-user">Yours
+            <li class="activity__current-steps">10000 steps</li>
+            <li class="activity__current-minutes">33 minutes</li>
+            <li class="activity__current-miles">12 miles</li>
+          </ul>
+          <ul class="activity__current-all-users">Theirs
+            <li class="activity__current-average-steps">9875 steps</li>
+            <li class="activity__current-average-minutes">29 minutes</li>
+            <li class="activity__current-average-miles">8 miles</li>
+          </ul>
+        </article>
       </section>
     </section>
 
     <section class="card">
-      <section class="hydration card__back">
+      <section class="hydration card__front">
         <h2 class="hydration__title">you drank</h2>
-        <h2 class="hydration__current">32</h2>
+        <h2 class="hydration__current">a number</h2>
         <h2 class="hydration__title">ounces</h2>
         <h3 class="hydration__date">on this date</h3>
-        <ul class="hydration__week"></ul>
       </section>
-      <section class="hydration card__front">
-        <h2>This is the water card</h2>
+      <section class="hydration card__back">
+        <h2>This week</h2>
+        <ul class="hydration__week-list"></ul>
       </section>
     </section>
 
     <section class="card">
-      <section class="sleep card__back">
+      <section class="sleep card__front">
         <article class="sleep__current">
           <h2 class="sleep__title">Sleep</h2>
           <h3 class="sleep__current-hours">9 hours</h3>
           <h3 class="sleep__current-quality">3.9 quality</h3>
-        </article>
-        <article class="sleep__week">
-          <h2 class="sleep__week-title">this week</h2>
-          <ul class="sleep__week-hours">hour
-          </ul>
-          <ul class="sleep__week-quality">quality
-          </ul>
         </article>
         <article class="sleep__averages">
           <h2 class="sleep__averages-title">your averages</h2>
@@ -107,8 +95,15 @@
           <p class="sleep__averages-quality">2.8 quality</p>
         </article>
       </section>
-      <section class="sleep card__front">
-        <h2>This is the sleep card</h2>
+      <section class="sleep card__back">
+        <h2>Sleep</h2>
+        <article class="sleep__week">
+          <h2 class="sleep__week-title">this week</h2>
+          <ul class="sleep__week-hours">hours
+          </ul>
+          <ul class="sleep__week-quality">quality
+          </ul>
+        </article>
       </section>
     </section>
 
