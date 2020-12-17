@@ -358,16 +358,22 @@ describe('Activity', () => {
     expect(dailyActiveMinutes).to.equal(188);
   });
   
-  it('should calculate a user\'s weekly average number of active minutes', () => {
+  it('should calculate a user\'s weekly average number of active minutes based on a given day', () => {
     const weeklyAverageActiveMinutes = activity.calculateWeeklyAverageActiveMinutes(2, '2019/06/15');
     expect(weeklyAverageActiveMinutes).to.be.a('number');
-    expect(weeklyAverageActiveMinutes).to.equal(152.38)
+    expect(weeklyAverageActiveMinutes).to.equal(138);
+    const weeklyAverageActiveMinutes2 = activity.calculateWeeklyAverageActiveMinutes(3, '2019/06/20');
+    expect(weeklyAverageActiveMinutes2).to.be.a('number');
+    expect(weeklyAverageActiveMinutes2).to.equal(159.33);
   });
 
   it('should return if a user reached their step goal on a specific date', () => {
     const stepGoalSuccess = activity.calculateStepGoalSuccess(4, '2019/06/16', userRepo);
     expect(stepGoalSuccess).to.be.a('boolean');
     expect(stepGoalSuccess).to.equal(true);
+    const stepGoalSuccess2 = activity.calculateStepGoalSuccess(4, '2019/06/15', userRepo);
+    expect(stepGoalSuccess2).to.be.a('boolean');
+    expect(stepGoalSuccess2).to.equal(false);
   });
 
   it('should return an array of dates a user successfully met their step goal (for all time)', () => {

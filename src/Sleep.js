@@ -52,8 +52,6 @@ class Sleep {
     const weeklyDataByMetric = weeklyData.map(sleepInfo => {
       return this.returnDailySleepData(userID, sleepInfo.date, dataMetric);
     })
-
-    console.log('weeklyDataByMetric >>>>>>>', weeklyDataByMetric);
     return weeklyDataByMetric;
   }
 
