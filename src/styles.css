@@ -88,13 +88,15 @@ li {
   list-style-type: none;
 }
 .user-info {
+  margin-bottom: 17%;
   display: grid;
-  row-gap: 10%;
+  row-gap: 1%;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 20% 70% 10%;
   grid-template-areas: 
       "a a"
-      "b c";
+      "b c"
+      "d e";
 }
 
 .user-info__greeting {
@@ -114,6 +116,16 @@ li {
   margin: auto;
   grid-area: c;
   padding: 0;
+}
+
+label {
+  margin: 10% 5% auto auto;
+  grid-area: d;
+}
+
+input {
+  margin: 10% auto auto 5%;
+  grid-area: e;
 }
 
 .hydration {
