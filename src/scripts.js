@@ -43,8 +43,14 @@ let activityInfo;
 let hydrationInfo;
 let sleepInfo
 
+const randomUser = () => {
+  return Math.floor(Math.random()*50)
+}
+
+
+
 const pageLoad = () => {
-  currentUser = userRepo.userData[25];
+  currentUser = userRepo.userData[randomUser()];
   userFirstName.innerText = `Hello, ${currentUser.returnUserFirstName()}!`;
   showUserInfo();
   showActivityInfo();
