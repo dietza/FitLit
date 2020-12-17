@@ -1,53 +1,107 @@
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-html {
-  height: 100vh;
+li, ul {
+  list-style-type: none;
+}
+
+.card {
+  margin: 3%;
+  border-radius: 16px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: transform 0.5s;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  position: relative;
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s; 
+}
+
+.flip {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.card__front, .card__back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__front {
+  height: 300px;
+  transform: rotateX(0deg);
+  -webkit-transform: rotateX(0deg);
+}
+
+.card__back {
+  width: 100%;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  position: absolute;
+  text-align: center;
+  right: 0;
+  left: 0;
+  top: 0;
 }
 
 li {
   list-style-type: none;
 }
 .user-info {
-  /* height: auto; */
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 20% 80%;
   grid-template-areas: 
-      "a"
-      "b";
+      "a a"
+      "b c";
 }
 
 .user-info__greeting {
+  font-size: 2rem;
   text-align: center;
   grid-area: a;
 }
 
 .user-info__basic-display {
   list-style-type: none;
+  margin: auto;
   grid-area: b;
   padding: 0;
 }
 
+.user-info__friends {
+  list-style-type: none;
+  margin: auto;
+  grid-area: c;
+  padding: 0;
+}
+
 .hydration {
+  justify-content: center;
+  align-content: center;
+  height: 350px;
   padding: 0%;
 }
 
 .hydration__week {
+  list-style-type: none;
   padding: 0%;
 }
 
-/* .sleep {
-  
+.sleep {
+  justify-content: center;
+  align-content: center;
+  height: 350px;
 }
-
-.sleep__current {
-  
-} */
 
 .sleep__week {
   display: grid;
@@ -70,6 +124,12 @@ li {
 .sleep__week-quality {
   padding: 0%;
   grid-area: c;
+}
+
+.activity {
+  justify-content: center;
+  align-content: center;
+  height: 350px;
 }
 
 .activity__current {
@@ -117,13 +177,17 @@ li {
   body {
     height: 100%;
     display: grid;
-    grid-template-columns: 30% 35% 35%;
-    grid-template-rows: 10% 40% 50%;
+    grid-template-columns: auto 35%;
+    grid-template-rows: 10% 20% 35% 35%;
     grid-template-areas: 
-      "title title title"
-      "user-info user-info hydration"
-      "activity activity sleep"
-      "activity activity sleep";
+      "title title"
+      "user user"
+      "activity hydration"
+      "activity  sleep";
+  }
+
+  .card__front, .card__back {
+    height: 300px;
   }
 
   .title {
@@ -131,9 +195,13 @@ li {
   }
 
   .user-info {
-    grid-area: user-info;
+    grid-area: user;
   }
 
+  .activity {
+    grid-area: activity;
+  }
+  
   .hydration {
     grid-area: hydration;
   }
@@ -141,21 +209,12 @@ li {
   .sleep {
     grid-area: sleep;
   }
-
-  .activity {
-    grid-area: activity;
-  }
   
 }
 
 @media Screen and (min-width: 1200px) {
   body {
-    grid-template-columns: 10% auto auto auto 10%;
-    grid-template-rows: 10% 40% 50%;
-    grid-template-areas: 
-      "none title title title"
-      "none user-info user-info hydration"
-      "none activity activity sleep"
-      "none activity activity sleep";
+    margin: auto;
+    max-width: 1000px;
   }
 }
