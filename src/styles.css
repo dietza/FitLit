@@ -53,6 +53,9 @@ li, ul {
   top: 0;
 }
 
+li {
+  list-style-type: none;
+}
 .user-info {
   display: grid;
   grid-template-columns: auto;

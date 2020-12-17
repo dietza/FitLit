@@ -30,7 +30,6 @@ function flipCard() {
 }
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
-
 let allUsers = userData.map(userInfo => {
   const user = new User(userInfo);
   return user;
@@ -38,14 +37,14 @@ let allUsers = userData.map(userInfo => {
 
 let userRepo = new UserRepository(allUsers);
 
-let today = '2019/06/22'
+let today;
 let currentUser;
 let activityInfo;
 let hydrationInfo;
 let sleepInfo
 
 const pageLoad = () => {
-  currentUser = userRepo.userData[22];
+  currentUser = userRepo.userData[47];
   userFirstName.innerText = `Hello! ${currentUser.returnUserFirstName()}!`;
   showUserInfo();
   showActivityInfo();
@@ -75,7 +74,7 @@ const showUserInfo = () => {
 
 const showActivityInfo = () => {
   activityInfo = new Activity(activityData);
-  // today = activityInfo.returnLatestDate();
+  today = activityInfo.returnLatestDate();
   const currentUserActivity = activityInfo.filterDataByUser(currentUser.id);
   const currentUserCurrentActivity = activityInfo.findDataByDate(today, currentUserActivity)
   const averageUserSteps = activityInfo.findAllUsersAverageByDate(today, 'numSteps');
