@@ -9,6 +9,16 @@ body {
   background-color: #262046;
   color: white;
 }
+.icon {
+  height: 50px;
+  align-self: center;
+}
+
+.arrow {
+  margin-top: 20%;
+  height: 30px;
+  align-self: center;
+}
 
 li, ul {
   list-style-type: none;
@@ -16,10 +26,8 @@ li, ul {
 
 .card {
   color: white;
-  /* background-color: #342C63; */
+  background-color: transparent;
   margin: 3%;
-  border-radius: 16px;
-  box-shadow: 0 5px 10px black;
   cursor: pointer;
   text-align: center;
   -webkit-transition: transform 0.5s;
@@ -40,12 +48,15 @@ li, ul {
 .card__front, .card__back {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  border-radius: 16px;
+  box-shadow: 0 5px 10px black;
   display: flex;
   flex-direction: column;
 }
 
 .card__front {
   color: white;
+  background-color: #342C63;
   height: 300px;
   transform: rotateX(0deg);
   -webkit-transform: rotateX(0deg);
@@ -53,6 +64,7 @@ li, ul {
 
 .card__back {
   color: white;
+  background-color: #342C63;
   width: 100%;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
@@ -68,7 +80,8 @@ li {
 }
 .user-info {
   display: grid;
-  grid-template-columns: auto;
+  row-gap: 10%;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 20% 80%;
   grid-template-areas: 
       "a a"
@@ -82,13 +95,12 @@ li {
 }
 
 .user-info__basic-display {
-  list-style-type: none;
   margin: auto;
   grid-area: b;
-  padding: 0;
 }
 
 .user-info__friends {
+  justify-self: center;
   list-style-type: none;
   margin: auto;
   grid-area: c;
