@@ -96,7 +96,6 @@ const showActivityInfo = () => {
   activityCurrentMiles.innerText = `${activityInfo.calculateMiles(currentUser.id, today, userRepo)} miles`;
   activityAverageSteps.innerText = `${averageUserSteps} steps`
   activityAverageMinutes.innerText = `${averageUserMinutes} minutes`
-  activityAverageMiles.innerText = `${averageUserSteps} steps`
   let activityWeekSteps = document.querySelector('.activity__week-steps');
   let activityWeekStairs = document.querySelector('.activity__week-stairs');
   let activityWeekMinutes = document.querySelector('.activity__week-minutes');
