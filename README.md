@@ -6,12 +6,18 @@ FitLit allows users to track their fitness goals, by showing them logged informa
 - and Hydration (measured in **ounces of water**).
 Users can view data on a single day, from the course of a week, or compare against the averages of other users.
 
-###### [Deployed Page](https://dietza.github.io/FitLit/src/index.html)
+###### Deployed Page
+- [FitLit](https://dietza.github.io/FitLit/src/index.html)
 
 ## Contributors
 - [Allison Dietz](https://github.com/dietza)
 - [Drew Bradley](https://github.com/DrewBradley)
 - [Heather Faerber](https://github.com/hfaerber) - Code Reviewer (Allison's Mentor)
+
+## Use
+![Mobile View](https://media.giphy.com/media/aROQ7apiuwc5hnDzZD/giphy.gif)
+![Mobile Calendar](https://media.giphy.com/media/NxVVlURhvBMpEOTQsS/giphy.gif)
+![Mobile Calendar](https://media.giphy.com/media/EZz8SoKkNxLimvfaaR/giphy.gif)
 
 ## Technologies
 FitLit was built using JavaScript on an HTML framework with CSS styling.
@@ -50,11 +56,6 @@ Challenges:
  - Using CSS grid to create a responsive site that adjusts to different screen sizes.
  - Writing DRY js when dealing with DOM or data for each class of data type.
  - Using media queries after having built the site for mobile, and maintaining the styling.
-
-## Images
-![Mobile View](https://media.giphy.com/media/aROQ7apiuwc5hnDzZD/giphy.gif)
-![Mobile Calendar](https://media.giphy.com/media/NxVVlURhvBMpEOTQsS/giphy.gif)
-![Mobile Calendar](https://media.giphy.com/media/EZz8SoKkNxLimvfaaR/giphy.gif)
 
 ## Future Iterations
 - Add features to increase accessability.
