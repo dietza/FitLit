@@ -3,18 +3,6 @@ class Hydration {
     this.hydrationData = hydrationData;
   }
 
-  calculateAverageWaterIntake(userID) {
-    const currentUserHydrationData = [];
-    const totalWaterIntake = this.hydrationData.reduce((sum, hydrationInfo) => {
-      if (hydrationInfo.userID === userID) {
-        currentUserHydrationData.push(hydrationInfo)
-        sum += hydrationInfo.numOunces;
-      }
-      return sum;
-    }, 0);
-    return parseFloat((totalWaterIntake / currentUserHydrationData.length).toFixed(2));
-  }
-
   filterDataByUser(userID) {
     const currentUserHydrationData = this.hydrationData.filter(hydrationInfo => {
       return hydrationInfo.userID === userID
@@ -52,6 +40,18 @@ class Hydration {
     const weeklyHydrationCounts = weeklyData.map(info => info[dataMetric])
     return weeklyHydrationCounts;
   }
+
+  calculateUserDataAverage(userID, dataMetric, dataSet) {
+    const currentUserHydrationData = this.filterDataByUser(userID, dataSet);
+    const total = dataSet.reduce((sum, hydrationInfo) => {
+      if (hydrationInfo.userID === userID) {
+        sum += hydrationInfo[dataMetric];
+      }
+      return sum;
+    }, 0);
+    return parseFloat((total / currentUserHydrationData.length).toFixed(2));
+  }
+
 
 }
 

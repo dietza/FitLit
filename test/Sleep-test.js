@@ -420,13 +420,13 @@ describe('Sleep', () => {
   });
 
   it('should return list of a user\'s sleep hours for a week', () => {
-    const weeklySleepTimes = sleep.findSleepDataByWeek(user4.id, '2019/06/15', 'hoursSlept');
+    const weeklySleepTimes = sleep.findWeeklySleepCounts(user4.id, '2019/06/15', 'hoursSlept');
     expect(weeklySleepTimes).to.be.an('array');
     expect(weeklySleepTimes).to.deep.equal([5.4]);
   })
 
   it('should return a list of a user\'s sleep quality for a week', () => {
-    const weeklySleepQuality = sleep.findSleepDataByWeek(1, '2019/06/22', 'sleepQuality');
+    const weeklySleepQuality = sleep.findWeeklySleepCounts(1, '2019/06/22', 'sleepQuality');
     expect(weeklySleepQuality).to.be.an('array');
     expect(weeklySleepQuality).to.deep.equal([3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3]);
   })

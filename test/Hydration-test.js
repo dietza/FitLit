@@ -381,8 +381,8 @@ describe('Hydration', () => {
   })
 
   it('should calculate the average amount of water consumed by a user', () => {
-    const averageWaterIntake1 = hydration.calculateAverageWaterIntake(1);
-    const averageWaterIntake2 = hydration.calculateAverageWaterIntake(2);
+    const averageWaterIntake1 = hydration.calculateUserDataAverage(1, 'numOunces', hydration.hydrationData);
+    const averageWaterIntake2 = hydration.calculateUserDataAverage(2, 'numOunces', hydration.hydrationData);
     expect(averageWaterIntake1).to.equal(59.56);
     expect(averageWaterIntake2).to.equal(67.56);
   })

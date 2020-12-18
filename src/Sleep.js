@@ -34,13 +34,13 @@ class Sleep {
     return weeklyData;
   }
 
-  findSleepDataByWeek(userID, date, dataMetric) {
+  findWeeklySleepCounts(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID, this.sleepData);
     const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
-    const weeklyDataByMetric = weeklyData.map(sleepInfo => {
+    const weeklySleepCounts = weeklyData.map(sleepInfo => {
       return this.returnDailySleepData(userID, sleepInfo.date, dataMetric);
     })
-    return weeklyDataByMetric;
+    return weeklySleepCounts;
   }
 
   calculateUserDataAverage(userID, dataMetric, dataSet) {
