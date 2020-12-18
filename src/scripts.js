@@ -1,29 +1,19 @@
 const userFirstName = document.querySelector('.user-info__greeting');
 const userInfoDisplay = document.querySelector('.user-info__basic-display');
-let userFriendsDisplay = document.querySelector('.user-info__friends')
 const currentDate = document.querySelector('.user-info__date-input')
 const dateButton = document.querySelector('.user-info__date-button')
-
 const hydrationCurrentCount = document.querySelector('.hydration__current');
 const hydrationDate = document.querySelector('.hydration__date');
-let hydrationWeek = document.querySelector('.hydration__week-list');
-
 const sleepCurrentHours = document.querySelector('.sleep__current-hours');
 const sleepCurrentQuality = document.querySelector('.sleep__current-quality');
-let sleepWeekHours = document.querySelector('.sleep__week-hours');
-let sleepWeekQuality = document.querySelector('.sleep__week-quality');
 const sleepAveragesHours = document.querySelector('.sleep__averages-hours');
 const sleepAverageQuality = document.querySelector('.sleep__averages-quality');
-
 const activityCurrentSteps = document.querySelector('.activity__current-steps');
 const activityCurrentMinutes = document.querySelector('.activity__current-minutes');
 const activityCurrentMiles = document.querySelector('.activity__current-miles');
 const activityAverageSteps = document.querySelector('.activity__current-average-steps')
 const activityAverageMinutes = document.querySelector('.activity__current-average-minutes')
 const activityAverageMiles = document.querySelector('.activity__current-average-miles')
-const activityWeekSteps = document.querySelector('.activity__week-steps');
-const activityWeekStairs = document.querySelector('.activity__week-stairs');
-const activityWeekMinutes = document.querySelector('.activity__week-minutes');
 
 const cards = document.querySelectorAll(".card");
 
@@ -33,32 +23,42 @@ function flipCard() {
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
-
-let allUsers = userData.map(userInfo => {
-  const user = new User(userInfo);
-  return user;
-});
-
-let userRepo = new UserRepository(allUsers);
-
+let allUsers
+let userRepo
 let today;
 let currentUser;
 let activityInfo;
 let hydrationInfo;
-let sleepInfo
+let sleepInfo;
+let thisWeeksDates;
 
 const randomUser = () => {
   return Math.floor(Math.random()*50)
 }
 
 const pageLoad = () => {
+  allUsers = userData.map(userInfo => {
+    const user = new User(userInfo);
+    return user;
+  });
+  userRepo = new UserRepository(allUsers);
   currentUser = userRepo.userData[randomUser()];
   userFirstName.innerText = `Hello, ${currentUser.returnUserFirstName()}!`;
+  activityInfo = new Activity(activityData);
+  hydrationInfo = new Hydration(hydrationData);
+  sleepInfo = new Sleep(sleepData);
+  today = activityInfo.returnLatestDate();
+  currentDate.value = today.replaceAll("/", "-");
+  generatePageDisplay();
+};
+
+const generatePageDisplay = () => {
+  thisWeeksDates = activityInfo.findWeeklyActivityCounts(currentUser.id, today, 'date');
   showUserInfo();
   showActivityInfo();
   showHydrationInfo();
   showSleepInfo();
-};
+}
 
 const printList = (parent, array) => {
   array.forEach(item => {
@@ -68,16 +68,21 @@ const printList = (parent, array) => {
   }
 )}
 
-const selectDate = () => {
-  today = currentDate.value.replaceAll("-", "/");
-  console.log(today)
-}
+const printListWithDates = (parent, array) => {
+  array.forEach((item, i) => {
+    let li = document.createElement('li');
+    parent.appendChild(li);
+    li.innerHTML += (thisWeeksDates[i] + " " + item);
+  }
+)}
 
 const showUserInfo = () => {
   const userFriends = currentUser.friends.map(friend => {
-    const userFriend = userRepo.findUser(friend)
-    return userFriend.name
+    const userFriend = userRepo.findUser(friend);
+    return userFriend.name;
   })
+  let userFriendsDisplay = document.querySelector('.user-info__friends')
+  userFriendsDisplay.innerText = "FRIENDS";
   userInfoDisplay.innerHTML = `<li class="user-info__stride-length">Stride: ${currentUser.strideLength} feet </li>
   <li class="user-info__step-goal">Daily Step Goal: ${currentUser.dailyStepGoal}</li>
   <li class="user-info__average-step-goal">Average Daily Step Goal: ${userRepo.calculateAverageStepGoal()}</li>
@@ -86,42 +91,41 @@ const showUserInfo = () => {
 };
 
 const showActivityInfo = () => {
-  activityInfo = new Activity(activityData);
-  today = activityInfo.returnLatestDate();
   const currentUserActivity = activityInfo.filterDataByUser(currentUser.id);
   const currentUserCurrentActivity = activityInfo.findDataByDate(today, currentUserActivity)
   const averageUserSteps = activityInfo.findAllUsersAverageByDate(today, 'numSteps');
   const averageUserMinutes = activityInfo.findAllUsersAverageByDate(today, 'minutesActive');
-  // const userWeeklySteps = activityInfo.returnUserWeeklyData(today, currentUser, 'numSteps');
+  const userWeeklySteps = activityInfo.findWeeklyActivityCounts(currentUser.id, today, 'numSteps');
+  const userWeeklyStairs = activityInfo.findWeeklyActivityCounts(currentUser.id, today, 'flightsOfStairs');
+  const userWeeklyMinutes = activityInfo.findWeeklyActivityCounts(currentUser.id, today, 'minutesActive');
   activityCurrentSteps.innerText = `${currentUserCurrentActivity.numSteps} steps`;
   activityCurrentMinutes.innerText = `${currentUserCurrentActivity.minutesActive} minutes`;
   activityCurrentMiles.innerText = `${activityInfo.calculateMiles(currentUser.id, today, userRepo)} miles`;
   activityAverageSteps.innerText = `${averageUserSteps} steps`
   activityAverageMinutes.innerText = `${averageUserMinutes} minutes`
   activityAverageMiles.innerText = `${averageUserSteps} steps`
-  // activityWeekSteps.innnerHTML = `
-  // <li class="activity__steps-day1">${userWeeklySteps[0]}</li>
-  // <li class="activity__steps-day2">${userWeeklySteps[1]}</li>
-  // <li class="activity__steps-day3">${userWeeklySteps[2]}</li>
-  // <li class="activity__steps-day4">${userWeeklySteps[3]}</li>
-  // <li class="activity__steps-day5">${userWeeklySteps[4]}</li>
-  // <li class="activity__steps-day6">${userWeeklySteps[5]}</li>
-  // <li class="activity__steps-day7">${userWeeklySteps[6]}</li>
-  // `
+  let activityWeekSteps = document.querySelector('.activity__week-steps');
+  let activityWeekStairs = document.querySelector('.activity__week-stairs');
+  let activityWeekMinutes = document.querySelector('.activity__week-minutes');
+  activityWeekSteps.innerText = "Steps";
+  activityWeekStairs.innerText = "Flights of Stairs";
+  activityWeekMinutes.innerText = "Minutes";
+  activityWeekSteps = printList(activityWeekSteps, userWeeklySteps);
+  activityWeekStairs = printList(activityWeekStairs, userWeeklyStairs);
+  activityWeekMinutes = printList(activityWeekMinutes, userWeeklyMinutes);
 }
 
 const showHydrationInfo = () => {
-  hydrationInfo = new Hydration(hydrationData);
   const currentUserHydration = hydrationInfo.findDailyWaterIntake(currentUser.id, today)
   const userWeeklyDrank = hydrationInfo.findWeeklyWaterIntake(currentUser.id, today)
-  
+  let hydrationWeek = document.querySelector('.hydration__week-list');
+  hydrationWeek.innerText = "You Drank"
   hydrationCurrentCount.innerText = currentUserHydration;
   hydrationDate.innerText = `on ${today}`;
   hydrationWeek = printList(hydrationWeek, userWeeklyDrank);
 }
 
 const showSleepInfo = () => {
-  sleepInfo = new Sleep(sleepData)
   const currentSleepHours = sleepInfo.returnDailySleepData(currentUser.id, today, 'hoursSlept')
   const currentSleepQuality = sleepInfo.returnDailySleepData(currentUser.id, today, 'sleepQuality')
   const weeklySleepHours = sleepInfo.findSleepDataByWeek(currentUser.id, today, 'hoursSlept')
@@ -130,11 +134,20 @@ const showSleepInfo = () => {
   const qualityAverage = sleepInfo.calculateDataAverage(currentUser.id, 'sleepQuality')
   sleepCurrentHours.innerText = `${currentSleepHours} hours`
   sleepCurrentQuality.innerText = `${currentSleepQuality} quality`
+  let sleepWeekHours = document.querySelector('.sleep__week-hours');
+  let sleepWeekQuality = document.querySelector('.sleep__week-quality');
+  sleepWeekHours.innerText = "Hours";
+  sleepWeekQuality.innerText = "Quality";
   sleepWeekHours = printList(sleepWeekHours, weeklySleepHours)
   sleepWeekQuality = printList(sleepWeekQuality, weeklySleepQuality)
   sleepAveragesHours.innerText = `${hoursAverage} hours`
   sleepAverageQuality.innerText = `${qualityAverage} quality`
-}
+};
+
+const selectDate = () => {
+  today = currentDate.value.replaceAll("-", "/");
+  generatePageDisplay();
+};
 
 window.onload = pageLoad()
 dateButton.addEventListener('click', selectDate);

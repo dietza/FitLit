@@ -88,7 +88,6 @@ li {
 }
 .user-info {
   height: 200px;
-  /* margin-bottom: 17%; */
   display: grid;
   row-gap: 5%;
   grid-template-columns: 50% 50%;
@@ -119,24 +118,32 @@ li {
 }
 
 .user-info__date-input {
+  background-color: hsl(174, 67%, 90%);
   margin: 2% 5% auto auto;
   grid-area: d;
 }
 
 .user-info__date-button {
-  margin: 2% auto auto 5%;
+  font-family: 'Jura', sans-serif;
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  background-color: hsl(174, 67%, 90%);
+  margin: 2% auto auto 20%;
   grid-area: e;
 }
 
 .hydration {
-  justify-content: center;
-  align-content: center;
   height: 350px;
   padding: 0%;
 }
 
-.hydration__week {
-  list-style-type: none;
+.hydration__week-title {
+  margin: auto;
+}
+
+.hydration__week-list {
+  margin: auto;
   padding: 0%;
 }
 
@@ -147,15 +154,18 @@ li {
 }
 
 .sleep__week {
+  margin-top: 15%;
   display: grid;
+  row-gap: 10%;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 15% 65%;
   grid-template-areas: 
       "a a"
       "b c";
 }
 
 .sleep__week-title {
+  margin: auto;
   grid-area: a;
 }
 
@@ -194,26 +204,33 @@ li {
 }
 
 .activity__week {
+  margin: auto 0 auto 0;
   display: grid;
+  row-gap: 10%;
   grid-template-columns: 33.3% 33.3% 33.3%;
-  grid-template-rows: auto;
+  grid-template-rows: 10% auto;
   grid-template-areas: 
-      "a b c";
+  "a a a"    
+  "b c d";
+}
+
+.activity__week-title {
+  grid-area: a;
 }
 
 .activity__week-steps {
   padding: 0%;
-  grid-area: a;
+  grid-area: b;
 }
 
 .activity__week-stairs {
   padding: 0%;
-  grid-area: b;
+  grid-area: c;
 }
 
 .activity__week-minutes {
   padding: 0%;
-  grid-area: c;
+  grid-area: d;
 }
 
 @media Screen and (min-width: 480px) {
@@ -265,11 +282,11 @@ li {
     margin: 5%;
   }
 
-  .user-info__date-label {
+  .user-info__date-input {
     margin: 10% 5% auto auto;
   }
   
-  .user-info__date-input {
+  .user-info__date-button {
     margin: 10% auto auto 5%;
   }
 
