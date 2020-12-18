@@ -388,23 +388,23 @@ describe('Sleep', () => {
   });
 
   it('should calculate the average number of hours a user has slept', () => {
-    const averageHoursSlept1 = sleep.calculateDataAverage(3, 'hoursSlept');
+    const averageHoursSlept1 = sleep.calculateUserDataAverage(3, 'hoursSlept', sleep.sleepData);
     expect(averageHoursSlept1).to.be.a('number');
-    expect(averageHoursSlept1).to.equal(9);
+    expect(averageHoursSlept1).to.equal(8.51);
 
-    const averageHoursSlept2 = sleep.calculateDataAverage(4, 'hoursSlept');
+    const averageHoursSlept2 = sleep.calculateUserDataAverage(4, 'hoursSlept', sleep.sleepData);
     expect(averageHoursSlept2).to.be.a('number');
-    expect(averageHoursSlept2).to.equal(7);
+    expect(averageHoursSlept2).to.equal(7.44);
   });
 
   it('should calculate a user\'s average sleep quality', () => {
-    const averageSleepQuality1 = sleep.calculateDataAverage(1, 'sleepQuality');
+    const averageSleepQuality1 = sleep.calculateUserDataAverage(1, 'sleepQuality', sleep.sleepData);
     expect(averageSleepQuality1).to.be.a('number');
-    expect(averageSleepQuality1).to.equal(3);
+    expect(averageSleepQuality1).to.equal(2.53);
 
-    const averageSleepQuality2 = sleep.calculateDataAverage(2, 'sleepQuality');
+    const averageSleepQuality2 = sleep.calculateUserDataAverage(2, 'sleepQuality', sleep.sleepData);
     expect(averageSleepQuality2).to.be.a('number');
-    expect(averageSleepQuality2).to.equal(4);
+    expect(averageSleepQuality2).to.equal(3.62);
   });
 
   it('should return a user\'s number of hours slept for a given date', () => {
@@ -432,13 +432,13 @@ describe('Sleep', () => {
   })
 
   it('should calculate the average sleep quality of all users (over all time)', () => {
-    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepDataAverage('sleepQuality');
+    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepAverage('sleepQuality', sleep.sleepData);
     expect(allUserSleepQualityAverage).to.be.a('number');
     expect(allUserSleepQualityAverage).to.equal(3)
   })
 
   it('should calculate the average sleep hours of all users (over all time)', () => {
-    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepDataAverage('hoursSlept');
+    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepAverage('hoursSlept', sleep.sleepData);
     expect(allUsersAverageHoursSlept).to.be.a('number');
     expect(allUsersAverageHoursSlept).to.equal(8)
   })

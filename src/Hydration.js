@@ -12,7 +12,7 @@ class Hydration {
       }
       return sum;
     }, 0);
-    return Math.floor(totalWaterIntake / currentUserHydrationData.length);
+    return parseFloat((totalWaterIntake / currentUserHydrationData.length).toFixed(2));
   }
 
   filterDataByUser(userID) {
@@ -46,11 +46,11 @@ class Hydration {
     return dailyIntake.numOunces;
   }
 
-  findWeeklyWaterIntake(userID, date) {
+  findWeeklyHydrationCounts(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
     const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
-    const weeklyOunceCounts = weeklyData.map(info => info.numOunces)
-    return weeklyOunceCounts;
+    const weeklyHydrationCounts = weeklyData.map(info => info[dataMetric])
+    return weeklyHydrationCounts;
   }
 
 }
