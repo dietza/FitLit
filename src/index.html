@@ -12,46 +12,29 @@
     <h1 class="title">FitLit</h1 class="title">
     <img class="logo" src="assets/FitLit-heart.png" alt="heart with dumbell resting infront of it">
     <section class="user-info">
-      <h2 class="user-info__greeting">Hello, User.Username!</h2>
+      <h2 class="user-info__greeting"></h2>
       <ul class="user-info__basic-display">
-        <li class="user-info__stride-length">strideLength: 4.5</li>
-        <li class="user-info__step-goal">My dailyStepGoal: 5000</li>
-        <li class="user-info__average-step-goal">Average daily Step Goal: 7250 </li>
+        <li class="user-info__stride-length"></li>
+        <li class="user-info__step-goal"></li>
+        <li class="user-info__average-step-goal"></li>
       </ul>
       <ul class="user-info__friends">YOUR FRIENDS
       </ul>
+      <input class="user-info__date-input" type="date" id="current-date" value="" min="2019-06-15" max="2019-09-22">
+      <button class="user-info__date-button" for="current-date">Choose A Date</label>
     </section>
 
     <section class="card">
       <section class="activity card__back">
-        <h2>Weekly Activity</h2>
         <article class="activity__week">
-          <ul class="activity__week-steps">steps
-            <li class="activity__steps-day1">8.3</li>
-            <li class="activity__steps-day2">9.2</li>
-            <li class="activity__steps-day3">9.2</li>
-            <li class="activity__steps-day4">3.8</li>
-            <li class="activity__steps-day5">7.5</li>
-            <li class="activity__steps-day6">8</li>
-            <li class="activity__steps-day7">9.2</li>
+          <h2 class="activity__week-title">Weekly Activity</h2>
+          <ul class="activity__week-dates">
           </ul>
-          <ul class="activity__week-stairs">flights of stairs
-            <li class="activity__stairs-day1">8.3</li>
-            <li class="activity__stairs-day2">9.2</li>
-            <li class="activity__stairs-day3">9.2</li>
-            <li class="activity__stairs-day4">3.8</li>
-            <li class="activity__stairs-day5">7.5</li>
-            <li class="activity__stairs-day6">8</li>
-            <li class="activity__stairs-day7">9.2</li>
+          <ul class="activity__week-steps">
           </ul>
-          <ul class="activity__week-minutes">minutes
-            <li class="activity__minutes-day1">8.3</li>
-            <li class="activity__minutes-day2">9.2</li>
-            <li class="activity__minutes-day3">9.2</li>
-            <li class="activity__minutes-day4">3.8</li>
-            <li class="activity__minutes-day5">7.5</li>
-            <li class="activity__minutes-day6">8</li>
-            <li class="activity__minutes-day7">9.2</li>
+          <ul class="activity__week-stairs">
+          </ul>
+          <ul class="activity__week-minutes">
           </ul>
         </article>
         <img class="arrow" src="assets/FitLit.arrow-cutout.png" alt="flip card for more details">
@@ -60,15 +43,14 @@
         <img class="icon" src="assets/FitLit.running-cutout.png" alt="foot wearing a sneaker running">
         <h2>Activity</h2>
         <article class="activity__current">
-          <ul class="activity__current-user">Yours
-            <li class="activity__current-steps">10000 steps</li>
-            <li class="activity__current-minutes">33 minutes</li>
-            <li class="activity__current-miles">12 miles</li>
+          <ul class="activity__current-user">You
+            <li class="activity__current-steps"></li>
+            <li class="activity__current-minutes"></li>
+            <li class="activity__current-miles"></li>
           </ul>
-          <ul class="activity__current-all-users">Theirs
-            <li class="activity__current-average-steps">9875 steps</li>
-            <li class="activity__current-average-minutes">29 minutes</li>
-            <li class="activity__current-average-miles">8 miles</li>
+          <ul class="activity__current-all-users">All Users
+            <li class="activity__current-average-steps"></li>
+            <li class="activity__current-average-minutes"></li>
           </ul>
         </article>
         <img class="arrow" src="assets/FitLit.arrow-cutout.png" alt="flip card for more details">
@@ -85,8 +67,13 @@
         <img class="arrow" src="assets/FitLit.arrow-cutout.png" alt="flip card for more details">
       </section>
       <section class="hydration card__back">
-        <h2>This week</h2>
-        <ul class="hydration__week-list"></ul>
+        <article class="hydration__week">
+          <h2 class="hydration__week-title">This week</h2>
+          <ul class="hydration__week-dates">dates
+          </ul>
+          <ul class="hydration__week-list">
+          </ul>
+        </article>
         <img class="arrow" src="assets/FitLit.arrow-cutout.png" alt="flip card for more details">
       </section>
     </section>
@@ -101,15 +88,16 @@
         </article>
         <article class="sleep__averages">
           <h2 class="sleep__averages-title">your averages</h2>
-          <p class="sleep__averages-hours">8.6 hours</p>
-          <p class="sleep__averages-quality">2.8 quality</p>
+          <h3 class="sleep__averages-hours">8.6 hours</h3>
+          <h3 class="sleep__averages-quality">2.8 quality</h3>
         </article>
         <img class="arrow" src="assets/FitLit.arrow-cutout.png" alt="flip card for more details">
       </section>
       <section class="sleep card__back">
-        <h2>Sleep</h2>
         <article class="sleep__week">
           <h2 class="sleep__week-title">this week</h2>
+          <ul class="sleep__week-dates">dates
+          </ul>
           <ul class="sleep__week-hours">hours
           </ul>
           <ul class="sleep__week-quality">quality
