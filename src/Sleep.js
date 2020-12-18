@@ -3,17 +3,6 @@ class Sleep {
     this.sleepData = sleepData
   }
 
-  calculateUserDataAverage(userID, dataMetric, dataSet) {
-    const currentUserSleepData = this.filterDataByUser(userID, dataSet);
-    const total = dataSet.reduce((sum, sleepInfo) => {
-      if (sleepInfo.userID === userID) {
-        sum += sleepInfo[dataMetric];
-      }
-      return sum;
-    }, 0);
-    return parseFloat((total / currentUserSleepData.length).toFixed(2));
-  }
-
   filterDataByUser(userID, dataSet) {
     const currentUserSleepData = dataSet.filter(sleepInfo => {
       return sleepInfo.userID === userID
@@ -54,6 +43,17 @@ class Sleep {
     return weeklyDataByMetric;
   }
 
+  calculateUserDataAverage(userID, dataMetric, dataSet) {
+    const currentUserSleepData = this.filterDataByUser(userID, dataSet);
+    const total = dataSet.reduce((sum, sleepInfo) => {
+      if (sleepInfo.userID === userID) {
+        sum += sleepInfo[dataMetric];
+      }
+      return sum;
+    }, 0);
+    return parseFloat((total / currentUserSleepData.length).toFixed(2));
+  }
+
   getTotalDates() {
     const dateList = this.sleepData.map(info => info.date);
     const totalDates = [...new Set(dateList)];
@@ -69,11 +69,11 @@ class Sleep {
   calculateAllUsersSleepAverage(dataMetric) {
     const totalDates = this.getTotalDates();
     const totalUsers = this.getTotalUsers();
-    const totalSleepData = this.sleepData.reduce((acc, initial) => {
-      acc += initial[dataMetric]
-      return acc;
+    const totalSleepData = this.sleepData.reduce((sum, initial) => {
+      sum += initial[dataMetric]
+      return sum;
     }, 0)
-    return Math.round((totalSleepData / totalDates.length) / totalUsers.length);
+    return parseFloat(((totalSleepData / totalDates.length) / totalUsers.length).toFixed(2));
   }
 
   findBestQualitySleepers(date) {
@@ -81,14 +81,9 @@ class Sleep {
     const userList = weeklySleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
     const bestQualitySleepers = totalUsers.reduce((topSleepers, userID) => {
-      const currentUserData = this.filterDataByUser(userID, this.sleepData);
-      const userTotal = currentUserData.reduce((total, userSleepData) => {
-        total += userSleepData.sleepQuality
-        return total;
-      }, 0);
-      const qualityAverage = userTotal / currentUserData.length;
+      const qualityAverage = this.calculateUserDataAverage(userID, 'sleepQuality', this.sleepData);
       if (qualityAverage >= 3) {
-        topSleepers.push({[userID]: parseFloat((qualityAverage).toFixed(2))});
+        topSleepers.push({[userID]: qualityAverage});
       }
       return topSleepers; 
     }, []);

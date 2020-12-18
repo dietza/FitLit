@@ -432,15 +432,15 @@ describe('Sleep', () => {
   })
 
   it('should calculate the average sleep quality of all users (over all time)', () => {
-    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepAverage('sleepQuality', sleep.sleepData);
+    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepAverage('sleepQuality');
     expect(allUserSleepQualityAverage).to.be.a('number');
-    expect(allUserSleepQualityAverage).to.equal(3)
+    expect(allUserSleepQualityAverage).to.equal(2.98)
   })
 
   it('should calculate the average sleep hours of all users (over all time)', () => {
-    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepAverage('hoursSlept', sleep.sleepData);
+    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepAverage('hoursSlept');
     expect(allUsersAverageHoursSlept).to.be.a('number');
-    expect(allUsersAverageHoursSlept).to.equal(8)
+    expect(allUsersAverageHoursSlept).to.equal(7.85)
   })
 
   it('should return all users with a sleep quality average above 3 in a given week', () => {
