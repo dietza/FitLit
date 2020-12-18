@@ -1,5 +1,4 @@
 * {
-  /* border: 1px solid red; */
   text-align: center;
   margin: 0;
   font-family: 'Jura', sans-serif;
@@ -88,13 +87,15 @@ li {
   list-style-type: none;
 }
 .user-info {
+  height: 200px;
   display: grid;
-  row-gap: 10%;
+  row-gap: 5%;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 20% 50% 20%;
   grid-template-areas: 
       "a a"
-      "b c";
+      "b c"
+      "d e";
 }
 
 .user-info__greeting {
@@ -116,16 +117,53 @@ li {
   padding: 0;
 }
 
+.user-info__date-input {
+  background-color: hsl(174, 67%, 90%);
+  margin: 2% 5% auto auto;
+  grid-area: d;
+}
+
+.user-info__date-button {
+  font-family: 'Jura', sans-serif;
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  background-color: hsl(174, 67%, 90%);
+  margin: 2% auto auto 20%;
+  grid-area: e;
+}
+
 .hydration {
-  justify-content: center;
-  align-content: center;
   height: 350px;
   padding: 0%;
 }
 
 .hydration__week {
-  list-style-type: none;
+  margin-top: 15%;
+  display: grid;
+  row-gap: 10%;
+  grid-template-columns: auto auto;
+  grid-template-rows: 15% 65%;
+  grid-template-areas: 
+      "a a"
+      "b c";
+}
+
+.hydration__week-title {
+  margin: auto;
+  grid-area: a;
+}
+
+.hydration__week-dates {
+  margin: auto;
   padding: 0%;
+  grid-area: b;
+}
+
+.hydration__week-list {
+  margin: auto;
+  padding: 0%;
+  grid-area: c;
 }
 
 .sleep {
@@ -135,26 +173,34 @@ li {
 }
 
 .sleep__week {
+  margin-top: 15%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 15% 85%;
+  row-gap: 10%;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 15% 65%;
   grid-template-areas: 
-      "a a"
-      "b c";
+      "a a a"
+      "b c d";
 }
 
 .sleep__week-title {
+  margin: auto;
   grid-area: a;
 }
 
-.sleep__week-hours {
+.sleep__week-dates {
   padding: 0%;
   grid-area: b;
 }
 
-.sleep__week-quality {
+.sleep__week-hours {
   padding: 0%;
   grid-area: c;
+}
+
+.sleep__week-quality {
+  padding: 0%;
+  grid-area: d;
 }
 
 .activity {
@@ -182,26 +228,38 @@ li {
 }
 
 .activity__week {
+  margin: auto 0 auto 0;
   display: grid;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  grid-template-rows: auto;
+  row-gap: 10%;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 10% auto;
   grid-template-areas: 
-      "a b c";
+  "a a a a"    
+  "b c d e";
 }
 
-.activity__week-steps {
-  padding: 0%;
+.activity__week-title {
   grid-area: a;
 }
 
-.activity__week-stairs {
+.activity__week-dates {
   padding: 0%;
   grid-area: b;
 }
 
-.activity__week-minutes {
+.activity__week-steps {
   padding: 0%;
   grid-area: c;
+}
+
+.activity__week-stairs {
+  padding: 0%;
+  grid-area: d;
+}
+
+.activity__week-minutes {
+  padding: 0%;
+  grid-area: e;
 }
 
 @media Screen and (min-width: 480px) {
@@ -209,10 +267,11 @@ li {
     height: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 10% 20% auto auto;
+    grid-template-rows: 10% 30% 30% 30%;
     grid-template-areas: 
       "logo title"
       "user user"
+      "date1 date2"
       "activity activity"
       "sleep  hydration";
   }
@@ -249,6 +308,15 @@ li {
 
   .user-info {
     grid-area: user;
+    margin: 5%;
+  }
+
+  .user-info__date-input {
+    margin: 10% 5% auto auto;
+  }
+  
+  .user-info__date-button {
+    margin: 10% auto auto 5%;
   }
 
   .activity {
