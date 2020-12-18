@@ -377,7 +377,7 @@ describe('Hydration', () => {
       "userID": 4,
       "date": "2019/06/23",
       "numOunces": 62
-    },]);
+    }, ]);
   })
 
   it('should calculate the average amount of water consumed by a user', () => {
@@ -387,15 +387,18 @@ describe('Hydration', () => {
     expect(averageWaterIntake2).to.equal(67);
   })
 
-  it('should find a user water intake on a given day', () => {
-    const dailyWaterIntake = hydration.calculateDailyWaterIntake(2, '2019/06/17');
+  it('should find a user\'s water intake on a given day', () => {
+    const dailyWaterIntake = hydration.findDailyWaterIntake(2, '2019/06/17');
     expect(dailyWaterIntake).to.equal(96);
   })
 
   it('should return a list of the user\'s water intake for a week', () => {
     const weekWaterIntake = hydration.findWeeklyWaterIntake(4, '2019/06/15');
-    expect(weekWaterIntake.length).to.equal(7);
-    expect(weekWaterIntake).to.deep.equal([85, 95, 82, 93, 21, 95, 91]);
+    const weekWaterIntake2 = hydration.findWeeklyWaterIntake(2, '2019/06/22');
+    expect(weekWaterIntake.length).to.equal(1);
+    expect(weekWaterIntake).to.deep.equal([85]);
+    expect(weekWaterIntake2.length).to.equal(7);
+    expect(weekWaterIntake2).to.deep.equal([91, 96, 70, 76, 71, 27, 58]);
   })
 
 })

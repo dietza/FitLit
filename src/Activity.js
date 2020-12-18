@@ -10,6 +10,13 @@ class Activity {
     const latestDate = sortedByDates[sortedByDates.length - 1].date;
     return latestDate;
   }
+
+  findWeeklyActivityCounts(userID, date, dataMetric) {
+    const currentUserData = this.filterDataByUser(userID);
+    const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
+    const weeklyActivityCounts = weeklyData.map(info => info[dataMetric]);
+    return weeklyActivityCounts;
+  }
   
   filterDataByUser(userID) {
     const currentUserActivityData = this.activityData.filter(activityInfo => {
@@ -32,6 +39,17 @@ class Activity {
     return dailyActivityData;
   }
 
+  findWeeklyDataByDate(date, dataSet) {
+    const endDate = new Date(date);
+    const startDate = new Date(Number(endDate));
+    startDate.setDate(startDate.getDate() - 6);
+    const weeklyData = dataSet.filter(dataEntry => {
+      const dataEntryDate = new Date(dataEntry.date);
+      return ((dataEntryDate >= startDate) && (dataEntryDate <= endDate))
+    });
+    return weeklyData;
+  }
+
   calculateMiles(userID, date, repository) {
     const currentUserActivityData = this.filterDataByUser(userID);
     const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
@@ -48,13 +66,7 @@ class Activity {
   }
 
   calculateWeeklyAverageActiveMinutes(userID, date) {
-    const startDate = new Date(date);
-    const endDate = new Date(Number(startDate));
-    endDate.setDate(endDate.getDate() + 7);
-    const weeklyActivityData = this.activityData.filter(activityInfo => {
-      const activityInfoDate = new Date(activityInfo.date);
-      return ((activityInfoDate >= startDate) && (activityInfoDate <= endDate))
-    })
+    const weeklyActivityData = this.findWeeklyDataByDate(date, this.activityData)
     const userWeeklyActivityData = weeklyActivityData.filter(activityInfo => activityInfo.userID === userID);
     const totalActiveMinutes = userWeeklyActivityData.reduce((total, activityInfo) => {
       total += activityInfo.minutesActive;
@@ -95,12 +107,12 @@ class Activity {
   }
 
   findAllUsersAverageByDate(date, dataMetric) {
-    const dailyActivityData = this.filterDataByDate(date);
-    const allUsersDailyTotal = dailyActivityData.reduce((sum, activityInfo) => {
+    const allUsersDailyActivityData = this.filterDataByDate(date);
+    const allUsersDailyTotal = allUsersDailyActivityData.reduce((sum, activityInfo) => {
       sum += activityInfo[dataMetric];
       return sum;
     }, 0);
-    const allUsersDailyAverage = allUsersDailyTotal / dailyActivityData.length;
+    const allUsersDailyAverage = allUsersDailyTotal / allUsersDailyActivityData.length;
     return allUsersDailyAverage;
   }
 }
