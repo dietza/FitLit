@@ -5,14 +5,14 @@ class Hydration {
 
   filterDataByUser(userID) {
     const currentUserHydrationData = this.hydrationData.filter(hydrationInfo => {
-      return hydrationInfo.userID === userID
+      return hydrationInfo.userID === userID;
     });
     return currentUserHydrationData;
   }
 
   findDataByDate(date, currentUserData) {
     const dailyData = currentUserData.find(hydrationInfo => {
-      return hydrationInfo.date === date
+      return hydrationInfo.date === date;
     });
     return dailyData;
   }
@@ -37,7 +37,7 @@ class Hydration {
   findWeeklyHydrationCounts(userID, date, dataMetric) {
     const currentUserData = this.filterDataByUser(userID);
     const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
-    const weeklyHydrationCounts = weeklyData.map(info => info[dataMetric])
+    const weeklyHydrationCounts = weeklyData.map(info => info[dataMetric]);
     return weeklyHydrationCounts;
   }
 
