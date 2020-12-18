@@ -1,5 +1,4 @@
 * {
-  /* border: 1px solid red; */
   text-align: center;
   margin: 0;
   font-family: 'Jura', sans-serif;
@@ -88,11 +87,12 @@ li {
   list-style-type: none;
 }
 .user-info {
-  margin-bottom: 17%;
+  height: 200px;
+  /* margin-bottom: 17%; */
   display: grid;
-  row-gap: 1%;
+  row-gap: 5%;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 20% 70% 10%;
+  grid-template-rows: 20% 50% 20%;
   grid-template-areas: 
       "a a"
       "b c"
@@ -118,13 +118,13 @@ li {
   padding: 0;
 }
 
-label {
-  margin: 10% 5% auto auto;
+.user-info__date-label {
+  margin: 2% 5% auto auto;
   grid-area: d;
 }
 
-input {
-  margin: 10% auto auto 5%;
+.user-info__date-input {
+  margin: 2% auto auto 5%;
   grid-area: e;
 }
 
@@ -221,10 +221,11 @@ input {
     height: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 10% 20% auto auto;
+    grid-template-rows: 10% 30% 30% 30%;
     grid-template-areas: 
       "logo title"
       "user user"
+      "date1 date2"
       "activity activity"
       "sleep  hydration";
   }
@@ -261,6 +262,15 @@ input {
 
   .user-info {
     grid-area: user;
+    margin: 5%;
+  }
+
+  .user-info__date-label {
+    margin: 10% 5% auto auto;
+  }
+  
+  .user-info__date-input {
+    margin: 10% auto auto 5%;
   }
 
   .activity {

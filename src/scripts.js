@@ -1,6 +1,7 @@
 const userFirstName = document.querySelector('.user-info__greeting');
 const userInfoDisplay = document.querySelector('.user-info__basic-display');
-let userFriendsDisplay = document.querySelector('.user-info__friends')
+let userFriendsDisplay = document.querySelector('.user-info__friends');
+const currentDate = document.querySelector('#current-date');
 
 const hydrationCurrentCount = document.querySelector('.hydration__current');
 const hydrationDate = document.querySelector('.hydration__date');
@@ -28,6 +29,7 @@ const cards = document.querySelectorAll(".card");
 function flipCard() {
   this.classList.toggle("flip");
 }
+
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
 let allUsers = userData.map(userInfo => {
@@ -37,7 +39,6 @@ let allUsers = userData.map(userInfo => {
 
 let userRepo = new UserRepository(allUsers);
 
-let today;
 let currentUser;
 let activityInfo;
 let hydrationInfo;
@@ -80,7 +81,7 @@ const showUserInfo = () => {
 
 const showActivityInfo = () => {
   activityInfo = new Activity(activityData);
-  today = activityInfo.returnLatestDate();
+  currentDate.value = activityInfo.returnLatestDate();
   const currentUserActivity = activityInfo.filterDataByUser(currentUser.id);
   const currentUserCurrentActivity = activityInfo.findDataByDate(today, currentUserActivity)
   const averageUserSteps = activityInfo.findAllUsersAverageByDate(today, 'numSteps');
