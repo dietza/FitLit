@@ -10,13 +10,6 @@ class Activity {
     const latestDate = sortedByDates[sortedByDates.length - 1].date;
     return latestDate;
   }
-
-  findWeeklyActivityCounts(userID, date, dataMetric) {
-    const currentUserData = this.filterDataByUser(userID);
-    const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
-    const weeklyActivityCounts = weeklyData.map(info => info[dataMetric]);
-    return weeklyActivityCounts;
-  }
   
   filterDataByUser(userID) {
     const currentUserActivityData = this.activityData.filter(activityInfo => {
@@ -50,13 +43,11 @@ class Activity {
     return weeklyData;
   }
 
-  calculateMiles(userID, date, repository) {
-    const currentUserActivityData = this.filterDataByUser(userID);
-    const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
-    const currentUser = repository.findUser(userID);
-    const totalStepsInFeet = currentUser.strideLength * dailyActivityData.numSteps
-    const totalMiles = (totalStepsInFeet / 5280).toFixed(2)
-    return parseFloat(totalMiles)
+  findWeeklyActivityCounts(userID, date, dataMetric) {
+    const currentUserData = this.filterDataByUser(userID);
+    const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
+    const weeklyActivityCounts = weeklyData.map(info => info[dataMetric]);
+    return weeklyActivityCounts;
   }
 
   returnActiveMinutes(userID, date) {
@@ -76,10 +67,19 @@ class Activity {
     return parseFloat(averageActiveMinutes);
   }
 
-  calculateStepGoalSuccess(userID, date, repository) {
+  calculateMiles(userID, date, dataSet) {
     const currentUserActivityData = this.filterDataByUser(userID);
     const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
-    const currentUser = repository.userData.find(user => user.id === userID);
+    const currentUser = dataSet.findUser(userID);
+    const totalStepsInFeet = currentUser.strideLength * dailyActivityData.numSteps
+    const totalMiles = (totalStepsInFeet / 5280).toFixed(2)
+    return parseFloat(totalMiles)
+  }
+
+  calculateStepGoalSuccess(userID, date, dataSet) {
+    const currentUserActivityData = this.filterDataByUser(userID);
+    const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
+    const currentUser = dataSet.userData.find(user => user.id === userID);
     if (dailyActivityData.numSteps >= currentUser.dailyStepGoal) {
       return true
     } else {
@@ -87,11 +87,11 @@ class Activity {
     }
   }
 
-  returnSuccessfulStepDates(userID, repository) {
+  returnSuccessfulStepDates(userID, dataSet) {
     const currentUserActivityData = this.filterDataByUser(userID);
     const stepGoalSuccessDates = [];
     currentUserActivityData.forEach(activityInfo => {
-      if (this.calculateStepGoalSuccess(userID, activityInfo.date, repository)) {
+      if (this.calculateStepGoalSuccess(userID, activityInfo.date, dataSet)) {
         stepGoalSuccessDates.push(activityInfo.date);
       }
     });
