@@ -118,12 +118,12 @@ li {
   padding: 0;
 }
 
-.user-info__date-label {
+.user-info__date-input {
   margin: 2% 5% auto auto;
   grid-area: d;
 }
 
-.user-info__date-input {
+.user-info__date-button {
   margin: 2% auto auto 5%;
   grid-area: e;
 }

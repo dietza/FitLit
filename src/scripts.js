@@ -1,7 +1,8 @@
 const userFirstName = document.querySelector('.user-info__greeting');
 const userInfoDisplay = document.querySelector('.user-info__basic-display');
-let userFriendsDisplay = document.querySelector('.user-info__friends');
-const currentDate = document.querySelector('#current-date');
+let userFriendsDisplay = document.querySelector('.user-info__friends')
+const currentDate = document.querySelector('.user-info__date-input')
+const dateButton = document.querySelector('.user-info__date-button')
 
 const hydrationCurrentCount = document.querySelector('.hydration__current');
 const hydrationDate = document.querySelector('.hydration__date');
@@ -32,6 +33,7 @@ function flipCard() {
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
+
 let allUsers = userData.map(userInfo => {
   const user = new User(userInfo);
   return user;
@@ -39,6 +41,7 @@ let allUsers = userData.map(userInfo => {
 
 let userRepo = new UserRepository(allUsers);
 
+let today;
 let currentUser;
 let activityInfo;
 let hydrationInfo;
@@ -47,8 +50,6 @@ let sleepInfo
 const randomUser = () => {
   return Math.floor(Math.random()*50)
 }
-
-
 
 const pageLoad = () => {
   currentUser = userRepo.userData[randomUser()];
@@ -67,6 +68,11 @@ const printList = (parent, array) => {
   }
 )}
 
+const selectDate = () => {
+  today = currentDate.value.replaceAll("-", "/");
+  console.log(today)
+}
+
 const showUserInfo = () => {
   const userFriends = currentUser.friends.map(friend => {
     const userFriend = userRepo.findUser(friend)
@@ -81,7 +87,7 @@ const showUserInfo = () => {
 
 const showActivityInfo = () => {
   activityInfo = new Activity(activityData);
-  currentDate.value = activityInfo.returnLatestDate();
+  today = activityInfo.returnLatestDate();
   const currentUserActivity = activityInfo.filterDataByUser(currentUser.id);
   const currentUserCurrentActivity = activityInfo.findDataByDate(today, currentUserActivity)
   const averageUserSteps = activityInfo.findAllUsersAverageByDate(today, 'numSteps');
@@ -106,7 +112,7 @@ const showActivityInfo = () => {
 
 const showHydrationInfo = () => {
   hydrationInfo = new Hydration(hydrationData);
-  const currentUserHydration = hydrationInfo.calculateDailyWaterIntake(currentUser.id, today)
+  const currentUserHydration = hydrationInfo.findDailyWaterIntake(currentUser.id, today)
   const userWeeklyDrank = hydrationInfo.findWeeklyWaterIntake(currentUser.id, today)
   
   hydrationCurrentCount.innerText = currentUserHydration;
@@ -131,3 +137,4 @@ const showSleepInfo = () => {
 }
 
 window.onload = pageLoad()
+dateButton.addEventListener('click', selectDate);
