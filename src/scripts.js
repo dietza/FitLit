@@ -68,13 +68,6 @@ const printList = (parent, array) => {
   }
 )}
 
-const printListWithDates = (parent, array) => {
-  array.forEach((item, i) => {
-    let li = document.createElement('li');
-    parent.appendChild(li);
-    li.innerHTML += (thisWeeksDates[i] + " " + item);
-  }
-)}
 
 const showUserInfo = () => {
   const userFriends = currentUser.friends.map(friend => {
@@ -107,9 +100,12 @@ const showActivityInfo = () => {
   let activityWeekSteps = document.querySelector('.activity__week-steps');
   let activityWeekStairs = document.querySelector('.activity__week-stairs');
   let activityWeekMinutes = document.querySelector('.activity__week-minutes');
+  let activityWeekDates = document.querySelector('.activity__week-dates');
   activityWeekSteps.innerText = "Steps";
   activityWeekStairs.innerText = "Flights of Stairs";
   activityWeekMinutes.innerText = "Minutes";
+  activityWeekDates.innerText = "Dates";
+  activityWeekDates = printList(activityWeekDates, thisWeeksDates);
   activityWeekSteps = printList(activityWeekSteps, userWeeklySteps);
   activityWeekStairs = printList(activityWeekStairs, userWeeklyStairs);
   activityWeekMinutes = printList(activityWeekMinutes, userWeeklyMinutes);
@@ -119,10 +115,13 @@ const showHydrationInfo = () => {
   const currentUserHydration = hydrationInfo.findDailyWaterIntake(currentUser.id, today)
   const userWeeklyDrank = hydrationInfo.findWeeklyWaterIntake(currentUser.id, today)
   let hydrationWeek = document.querySelector('.hydration__week-list');
+  let hydrationWeekDates = document.querySelector('.hydration__week-dates');
+  hydrationWeekDates.innerText = "Dates"
   hydrationWeek.innerText = "You Drank"
   hydrationCurrentCount.innerText = currentUserHydration;
   hydrationDate.innerText = `on ${today}`;
   hydrationWeek = printList(hydrationWeek, userWeeklyDrank);
+  hydrationWeekDates = printList(hydrationWeekDates, thisWeeksDates);
 }
 
 const showSleepInfo = () => {
@@ -136,8 +135,11 @@ const showSleepInfo = () => {
   sleepCurrentQuality.innerText = `${currentSleepQuality} quality`
   let sleepWeekHours = document.querySelector('.sleep__week-hours');
   let sleepWeekQuality = document.querySelector('.sleep__week-quality');
+  let sleepWeekDates = document.querySelector('.sleep__week-dates');
+  sleepWeekDates.innerText = "Dates";
   sleepWeekHours.innerText = "Hours";
   sleepWeekQuality.innerText = "Quality";
+  sleepWeekDates = printList(sleepWeekDates, thisWeeksDates)
   sleepWeekHours = printList(sleepWeekHours, weeklySleepHours)
   sleepWeekQuality = printList(sleepWeekQuality, weeklySleepQuality)
   sleepAveragesHours.innerText = `${hoursAverage} hours`
