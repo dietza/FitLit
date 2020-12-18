@@ -17,6 +17,7 @@ Users can view data on a single day, from the course of a week, or compare again
 ## Use
 ![Mobile View](https://media.giphy.com/media/aROQ7apiuwc5hnDzZD/giphy.gif)
 ![Mobile Calendar](https://media.giphy.com/media/NxVVlURhvBMpEOTQsS/giphy.gif)
+
 ![Mobile Calendar](https://media.giphy.com/media/EZz8SoKkNxLimvfaaR/giphy.gif)
 
 ## Technologies
