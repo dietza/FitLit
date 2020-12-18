@@ -7,8 +7,8 @@ FitLit allows users to track their fitness goals, by showing them logged informa
 
 Users are able to view data for a single day, over the course of a week based on a selected day, and compare against the averages of the app's other users.
 
-###### Deployed Page
-- [FitLit](https://dietza.github.io/FitLit/src/index.html)
+##### Deployed Page
+[FitLit](https://dietza.github.io/FitLit/src/index.html)
 
 ## Contributors
 - [Allison Dietz](https://github.com/dietza)
