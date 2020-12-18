@@ -4,7 +4,8 @@ FitLit allows users to track their fitness goals, by showing them logged informa
 - Activity (measured in **steps**, **flights of stairs**, **active minutes**, and **miles**).
 - Sleep (measured in **hours**, and **sleep quality**).
 - and Hydration (measured in **ounces of water**).
-Users can view data on a single day, from the course of a week, or compare against the averages of other users.
+
+Users are able to view data for a single day, over the course of a week based on a selected day, and compare against the averages of the app's other users.
 
 ###### Deployed Page
 - [FitLit](https://dietza.github.io/FitLit/src/index.html)
