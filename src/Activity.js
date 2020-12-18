@@ -13,21 +13,21 @@ class Activity {
   
   filterDataByUser(userID) {
     const currentUserActivityData = this.activityData.filter(activityInfo => {
-      return activityInfo.userID === userID
+      return activityInfo.userID === userID;
     });
     return currentUserActivityData;
   }
 
   findDataByDate(date, currentUserData) {
     const dailyData = currentUserData.find(activityInfo => {
-      return activityInfo.date === date
+      return activityInfo.date === date;
     });
     return dailyData;
   }
 
   filterDataByDate(date) {
     const dailyActivityData = this.activityData.filter(activityInfo => {
-      return activityInfo.date === date
+      return activityInfo.date === date;
     });
     return dailyActivityData;
   }
@@ -38,7 +38,7 @@ class Activity {
     startDate.setDate(startDate.getDate() - 6);
     const weeklyData = dataSet.filter(dataEntry => {
       const dataEntryDate = new Date(dataEntry.date);
-      return ((dataEntryDate >= startDate) && (dataEntryDate <= endDate))
+      return ((dataEntryDate >= startDate) && (dataEntryDate <= endDate));
     });
     return weeklyData;
   }
@@ -57,12 +57,12 @@ class Activity {
   }
 
   calculateWeeklyAverageActiveMinutes(userID, date) {
-    const weeklyActivityData = this.findWeeklyDataByDate(date, this.activityData)
+    const weeklyActivityData = this.findWeeklyDataByDate(date, this.activityData);
     const userWeeklyActivityData = weeklyActivityData.filter(activityInfo => activityInfo.userID === userID);
     const totalActiveMinutes = userWeeklyActivityData.reduce((total, activityInfo) => {
       total += activityInfo.minutesActive;
       return total;
-    }, 0)
+    }, 0);
     const averageActiveMinutes = (totalActiveMinutes / userWeeklyActivityData.length).toFixed(2);
     return parseFloat(averageActiveMinutes);
   }
@@ -71,9 +71,9 @@ class Activity {
     const currentUserActivityData = this.filterDataByUser(userID);
     const dailyActivityData = this.findDataByDate(date, currentUserActivityData);
     const currentUser = dataSet.findUser(userID);
-    const totalStepsInFeet = currentUser.strideLength * dailyActivityData.numSteps
-    const totalMiles = (totalStepsInFeet / 5280).toFixed(2)
-    return parseFloat(totalMiles)
+    const totalStepsInFeet = currentUser.strideLength * dailyActivityData.numSteps;
+    const totalMiles = (totalStepsInFeet / 5280).toFixed(2);
+    return parseFloat(totalMiles);
   }
 
   calculateStepGoalSuccess(userID, date, dataSet) {
@@ -89,12 +89,12 @@ class Activity {
 
   returnSuccessfulStepDates(userID, dataSet) {
     const currentUserActivityData = this.filterDataByUser(userID);
-    const stepGoalSuccessDates = [];
-    currentUserActivityData.forEach(activityInfo => {
+    const stepGoalSuccessDates = currentUserActivityData.reduce((successfulDates, activityInfo) => {
       if (this.calculateStepGoalSuccess(userID, activityInfo.date, dataSet)) {
-        stepGoalSuccessDates.push(activityInfo.date);
+        successfulDates.push(activityInfo.date);
       }
-    });
+      return successfulDates;
+    }, []);
     return stepGoalSuccessDates;
   }
 
@@ -103,7 +103,7 @@ class Activity {
     const sortedByStairsClimbed = currentUserActivityData.sort((a, b) => {
       return b.flightsOfStairs - a.flightsOfStairs;
     })
-    return {[sortedByStairsClimbed[0].date]: sortedByStairsClimbed[0].flightsOfStairs}
+    return {[sortedByStairsClimbed[0].date]: sortedByStairsClimbed[0].flightsOfStairs};
   }
 
   findAllUsersAverageByDate(date, dataMetric) {

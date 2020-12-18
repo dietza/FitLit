@@ -5,14 +5,14 @@ class Sleep {
 
   filterDataByUser(userID, dataSet) {
     const currentUserSleepData = dataSet.filter(sleepInfo => {
-      return sleepInfo.userID === userID
+      return sleepInfo.userID === userID;
     });
     return currentUserSleepData;
   }
 
   findDataByDate(date, currentUserData) {
     const dailyData = currentUserData.find(sleepInfo => {
-      return sleepInfo.date === date
+      return sleepInfo.date === date;
     });
     return dailyData;
   }
@@ -29,7 +29,7 @@ class Sleep {
     startDate.setDate(startDate.getDate() - 6);
     const weeklyData = dataSet.filter(dataEntry => {
       const dataEntryDate = new Date(dataEntry.date);
-      return ((dataEntryDate >= startDate) && (dataEntryDate <= endDate))
+      return ((dataEntryDate >= startDate) && (dataEntryDate <= endDate));
     });
     return weeklyData;
   }
@@ -77,7 +77,7 @@ class Sleep {
   }
 
   findBestQualitySleepers(date) {
-    const weeklySleepData = this.findWeeklyDataByDate(date, this.sleepData)
+    const weeklySleepData = this.findWeeklyDataByDate(date, this.sleepData);
     const userList = weeklySleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
     const bestQualitySleepers = totalUsers.reduce((topSleepers, userID) => {
@@ -92,14 +92,14 @@ class Sleep {
 
   findLongestNightlySleeper(date) {
     const nightlyData = this.sleepData.filter(sleepDataOb => {
-      return sleepDataOb.date === date
+      return sleepDataOb.date === date;
     });
     const sortedByHours = nightlyData.sort((a, b) => {
-      return b.hoursSlept - a.hoursSlept
+      return b.hoursSlept - a.hoursSlept;
     });
     const winnerID =  sortedByHours[0].userID;
     const winnerHours = sortedByHours[0].hoursSlept;
-    return { [winnerID]: winnerHours }
+    return { [winnerID]: winnerHours };
   }
 
 }
