@@ -6,6 +6,8 @@ FitLit allows users to track their fitness goals, by showing them logged informa
 - and Hydration (measured in **ounces of water**).
 Users can view data on a single day, from the course of a week, or compare against the averages of other users.
 
+###### [Deployed Page](https://dietza.github.io/FitLit/src/index.html)
+
 ## Contributors
 - [Allison Dietz](https://github.com/dietza)
 - [Drew Bradley](https://github.com/DrewBradley)
