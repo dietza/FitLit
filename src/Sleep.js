@@ -3,20 +3,8 @@ class Sleep {
     this.sleepData = sleepData
   }
 
-  calculateDataAverage(userID, dataMetric) {
-    const currentUserSleepData = [];
-    const total = this.sleepData.reduce((sum, sleepInfo) => {
-      if (sleepInfo.userID === userID) {
-        currentUserSleepData.push(sleepInfo)
-        sum += sleepInfo[dataMetric];
-      }
-      return sum;
-    }, 0);
-    return Math.round(total / currentUserSleepData.length);
-  }
-
-  filterDataByUser(userID) {
-    const currentUserSleepData = this.sleepData.filter(sleepInfo => {
+  filterDataByUser(userID, dataSet) {
+    const currentUserSleepData = dataSet.filter(sleepInfo => {
       return sleepInfo.userID === userID
     });
     return currentUserSleepData;
@@ -30,7 +18,7 @@ class Sleep {
   }
 
   returnDailySleepData(userID, date, dataMetric) {
-    const currentUserData = this.filterDataByUser(userID);
+    const currentUserData = this.filterDataByUser(userID, this.sleepData);
     const dailySleepData = this.findDataByDate(date, currentUserData);
     return dailySleepData[dataMetric];
   }
@@ -46,25 +34,46 @@ class Sleep {
     return weeklyData;
   }
 
-  findSleepDataByWeek(userID, date, dataMetric) {
-    const currentUserData = this.filterDataByUser(userID);
+  findWeeklySleepCounts(userID, date, dataMetric) {
+    const currentUserData = this.filterDataByUser(userID, this.sleepData);
     const weeklyData = this.findWeeklyDataByDate(date, currentUserData);
-    const weeklyDataByMetric = weeklyData.map(sleepInfo => {
+    const weeklySleepCounts = weeklyData.map(sleepInfo => {
       return this.returnDailySleepData(userID, sleepInfo.date, dataMetric);
     })
-    return weeklyDataByMetric;
+    return weeklySleepCounts;
   }
 
-  calculateAllUsersSleepDataAverage(dataMetric) {
+  calculateUserDataAverage(userID, dataMetric, dataSet) {
+    const currentUserSleepData = this.filterDataByUser(userID, dataSet);
+    const total = dataSet.reduce((sum, sleepInfo) => {
+      if (sleepInfo.userID === userID) {
+        sum += sleepInfo[dataMetric];
+      }
+      return sum;
+    }, 0);
+    return parseFloat((total / currentUserSleepData.length).toFixed(2));
+  }
+
+  getTotalDates() {
     const dateList = this.sleepData.map(info => info.date);
     const totalDates = [...new Set(dateList)];
+    return totalDates;
+  }
+
+  getTotalUsers() {
     const userList = this.sleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
-    const totalSleepData = this.sleepData.reduce((acc, initial) => {
-      acc += initial[dataMetric]
-      return acc;
+    return totalUsers;
+  }
+
+  calculateAllUsersSleepAverage(dataMetric) {
+    const totalDates = this.getTotalDates();
+    const totalUsers = this.getTotalUsers();
+    const totalSleepData = this.sleepData.reduce((sum, initial) => {
+      sum += initial[dataMetric]
+      return sum;
     }, 0)
-    return Math.round((totalSleepData / totalDates.length) / totalUsers.length);
+    return parseFloat(((totalSleepData / totalDates.length) / totalUsers.length).toFixed(2));
   }
 
   findBestQualitySleepers(date) {
@@ -72,14 +81,9 @@ class Sleep {
     const userList = weeklySleepData.map(info => info.userID);
     const totalUsers = [...new Set(userList)];
     const bestQualitySleepers = totalUsers.reduce((topSleepers, userID) => {
-      const currentUserData = this.filterDataByUser(userID);
-      const userTotal = currentUserData.reduce((total, userSleepData) => {
-        total += userSleepData.sleepQuality
-        return total;
-      }, 0);
-      const qualityAverage = userTotal / currentUserData.length;
+      const qualityAverage = this.calculateUserDataAverage(userID, 'sleepQuality', this.sleepData);
       if (qualityAverage >= 3) {
-        topSleepers.push({[userID]: parseFloat((qualityAverage).toFixed(2))});
+        topSleepers.push({[userID]: qualityAverage});
       }
       return topSleepers; 
     }, []);

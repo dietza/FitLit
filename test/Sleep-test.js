@@ -388,23 +388,23 @@ describe('Sleep', () => {
   });
 
   it('should calculate the average number of hours a user has slept', () => {
-    const averageHoursSlept1 = sleep.calculateDataAverage(3, 'hoursSlept');
+    const averageHoursSlept1 = sleep.calculateUserDataAverage(3, 'hoursSlept', sleep.sleepData);
     expect(averageHoursSlept1).to.be.a('number');
-    expect(averageHoursSlept1).to.equal(9);
+    expect(averageHoursSlept1).to.equal(8.51);
 
-    const averageHoursSlept2 = sleep.calculateDataAverage(4, 'hoursSlept');
+    const averageHoursSlept2 = sleep.calculateUserDataAverage(4, 'hoursSlept', sleep.sleepData);
     expect(averageHoursSlept2).to.be.a('number');
-    expect(averageHoursSlept2).to.equal(7);
+    expect(averageHoursSlept2).to.equal(7.44);
   });
 
   it('should calculate a user\'s average sleep quality', () => {
-    const averageSleepQuality1 = sleep.calculateDataAverage(1, 'sleepQuality');
+    const averageSleepQuality1 = sleep.calculateUserDataAverage(1, 'sleepQuality', sleep.sleepData);
     expect(averageSleepQuality1).to.be.a('number');
-    expect(averageSleepQuality1).to.equal(3);
+    expect(averageSleepQuality1).to.equal(2.53);
 
-    const averageSleepQuality2 = sleep.calculateDataAverage(2, 'sleepQuality');
+    const averageSleepQuality2 = sleep.calculateUserDataAverage(2, 'sleepQuality', sleep.sleepData);
     expect(averageSleepQuality2).to.be.a('number');
-    expect(averageSleepQuality2).to.equal(4);
+    expect(averageSleepQuality2).to.equal(3.62);
   });
 
   it('should return a user\'s number of hours slept for a given date', () => {
@@ -420,27 +420,27 @@ describe('Sleep', () => {
   });
 
   it('should return list of a user\'s sleep hours for a week', () => {
-    const weeklySleepTimes = sleep.findSleepDataByWeek(user4.id, '2019/06/15', 'hoursSlept');
+    const weeklySleepTimes = sleep.findWeeklySleepCounts(user4.id, '2019/06/15', 'hoursSlept');
     expect(weeklySleepTimes).to.be.an('array');
     expect(weeklySleepTimes).to.deep.equal([5.4]);
   })
 
   it('should return a list of a user\'s sleep quality for a week', () => {
-    const weeklySleepQuality = sleep.findSleepDataByWeek(1, '2019/06/22', 'sleepQuality');
+    const weeklySleepQuality = sleep.findWeeklySleepCounts(1, '2019/06/22', 'sleepQuality');
     expect(weeklySleepQuality).to.be.an('array');
     expect(weeklySleepQuality).to.deep.equal([3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3]);
   })
 
   it('should calculate the average sleep quality of all users (over all time)', () => {
-    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepDataAverage('sleepQuality');
+    const allUserSleepQualityAverage = sleep.calculateAllUsersSleepAverage('sleepQuality');
     expect(allUserSleepQualityAverage).to.be.a('number');
-    expect(allUserSleepQualityAverage).to.equal(3)
+    expect(allUserSleepQualityAverage).to.equal(2.98)
   })
 
   it('should calculate the average sleep hours of all users (over all time)', () => {
-    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepDataAverage('hoursSlept');
+    const allUsersAverageHoursSlept = sleep.calculateAllUsersSleepAverage('hoursSlept');
     expect(allUsersAverageHoursSlept).to.be.a('number');
-    expect(allUsersAverageHoursSlept).to.equal(8)
+    expect(allUsersAverageHoursSlept).to.equal(7.85)
   })
 
   it('should return all users with a sleep quality average above 3 in a given week', () => {
